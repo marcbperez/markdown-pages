@@ -1,0 +1,15 @@
+/* Styling for CodeHighlighter.js. */
+
+.code-toolbar {
+  position: relative;
+}
+
+.code-toolbar>.toolbar {
+  position: absolute;
+  right: var(--spacing-small);
+  top: var(--spacing-small);
+}
+
+.code-toolbar>.toolbar button {
+  cursor: pointer;
+}

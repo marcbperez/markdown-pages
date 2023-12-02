@@ -1,0 +1,13 @@
+---
+# Sitemap metadata, configures the output of the sitemap.
+# `base` and `url.loc` are required. `url.loc` is relative to `base`. Commented
+# out parameters are kept as references for the output.
+
+base: https://my-site.net
+url:
+  - loc: /
+    # lastmod: 2002-01-01
+    # changefreq: monthly
+    # priority: 0.5
+---
+

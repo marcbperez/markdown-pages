@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+
+<title>$channel.title$</title>
+<link>$channel.link$</link>
+<description>$channel.description$</description>
+$if(channel.category)$
+$for(channel.category)$
+<category>$channel.category$</category>
+$endfor$
+$endif$
+$if(channel.copyright)$
+<copyright>$channel.copyright$</copyright>
+$endif$
+$if(channel.generator)$
+<generator>$channel.generator$</generator>
+$endif$
+$if(channel.image)$
+<image>
+  <url>$channel.link$$channel.image.url$</url>
+  <title>$channel.image.title$</title>
+  <link>$channel.link$</link>
+$if(channel.image.description)$
+  <description>$channel.image.description$</description>
+$endif$
+</image>
+$endif$
+$if(channel.language)$
+<language>$channel.language$</language>
+$endif$
+$if(channel.lastBuildDate)$
+<lastBuildDate>$channel.lastBuildDate$</lastBuildDate>
+$endif$
+$if(channel.pubDate)$
+<pubDate>$channel.pubDate$</pubDate>
+$endif$
+$if(channel.managingEditor)$
+<managingEditor>$channel.managingEditor$</managingEditor>
+$endif$
+$if(channel.webMaster)$
+<webMaster>$channel.webMaster$</webMaster>
+$endif$
+
+$if(item)$
+$for(item)$
+<item>
+  <title>$item.title$</title>
+  <link>$channel.link$$item.link$</link>
+  <description>$item.description$</description>
+  <guid isPermaLink="true">$channel.link$$item.link$</guid>
+$if(item.author)$
+  <author>$item.author$</author>
+$endif$
+$if(item.category)$
+$for(item.category)$
+  <category>$item.category$</category>
+$endfor$
+$endif$
+$if(item.enclosure)$
+<enclosure
+  url="$channel.link$$item.enclosure.url$"
+  length="$item.enclosure.length$"
+  type="$item.enclosure.type$" />
+$endif$
+$if(item.pubDate)$
+  <pubDate>$item.pubDate$</pubDate>
+$endif$
+$if(item.source)$
+  <source url="$item.source.url$">$item.source.title$</source>
+$endif$
+$if(item.comments)$
+  <comments>$item.comments$</comments>
+$endif$
+</item>
+$endfor$
+$endif$
+
+</channel>
+</rss>

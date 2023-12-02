@@ -1,0 +1,40 @@
+---
+# Default page metadata, configures the template for all pages.
+# `title` is required. `style`, `module` and `script` use any URL that responds
+# with a CSS, JavaScript module or JavaScript script, respectively.
+
+rss: /rss.xml
+favicon: /assets/favicon.ico
+title: markdown-pages
+description: Static Site Generator for Markdown
+author:
+  - Marc B. Perez
+keywords:
+  - markdown-pages
+  - Static Site Generator
+  - Markdown
+  - Preact
+  - Gradle
+  - Pandoc
+  - Spock
+  - Prism
+toc: true
+nav:
+  - label: Home
+    href: /index.html
+  - label: Tutorial
+    href: /tutorial.html
+  - label: Elements
+    href: /elements.html
+  - label: Readme
+    href: /README.html
+  - label: Change Log
+    href: /CHANGELOG.html
+  - label: Sources
+    href: https://github.com/marcbperez/markdown-pages
+  - label: RSS
+    href: /rss.xml
+  - label: Sitemap
+    href: /sitemap.xml
+---
+

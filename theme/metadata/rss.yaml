@@ -1,0 +1,43 @@
+---
+# RSS feed metadata, configures the output of the RSS feed.
+# `channel`, `channel.link`, `channel.title`, `channel.description`,
+# `item.link`, `item.title` and `item.description` are required. `item.link`,
+# `image.url` and `enclosure.url` are relative to `channel.link`.
+# `item.enclosure.length` is in bytes. Commented out parameters are kept as
+# references for the output.
+
+channel:
+  link: https://my-site.net
+  title: New website
+  description: A new website in cyberspace
+  # category:
+  #   - Software Engineering
+  # copyright: 2002 Jane Dev. All rights reserved.
+  # generator: markdown-pages
+  # image:
+  #   url: /assets/logo.png
+  #   title: markdown-pages
+  #   description: The logo of markdown-pages.
+  # language: en
+  # lastBuildDate: Tue, 1 Jan 2002
+  # pubDate: Tue, 1 Jan 2002
+  # managingEditor: editor@my-site.net
+  # webMaster: webmaster@my-site.net
+item:
+  - link: /
+    title: Home
+    description: Home of a new website in cyberspace.
+    # author: author@my-site.net
+    # category:
+    #   - Cyberspace
+    # enclosure:
+    #   url: /assets/get-started.mp4
+    #   length: 95173
+    #   type: video/mp4
+    # pubDate: Tue, 1 Jan 2002
+    # source:
+    #   url: https://pandoc.org/
+    #   title: Pandoc.org
+    # comments: https://comments.net/my-site.net/1b56
+---
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html$if(lang)$ lang="$lang$"$endif$$if(dir)$ dir="$dir$"$endif$>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>$title$</title>
+$if(author)$
+$for(author)$
+  <meta name="author" content="$author$">
+$endfor$
+$endif$
+$if(description)$
+  <meta name="description" content="$description$">
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$,$endfor$">
+$endif$
+$if(rss)$
+  <link rel="alternate" type="application/rss+xml" href="$rss$">
+$endif$
+$if(favicon)$
+  <link rel="shortcut icon" href="$favicon$">
+$endif$
+$if(theme.style)$
+$for(theme.style)$
+  <link rel="stylesheet" href="$theme.style$">
+$endfor$
+$endif$
+$if(style)$
+$for(style)$
+  <link rel="stylesheet" href="$style$">
+$endfor$
+$endif$
+$if(theme.module)$
+$for(theme.module)$
+  <script type="module" src="$theme.module$"></script>
+$endfor$
+$endif$
+$if(module)$
+$for(module)$
+  <script type="module" src="$module$"></script>
+$endfor$
+$endif$
+</head>
+
+<body class="detect light medium serif">
+  <header>
+    <div>
+      <p class="themeform"></p>
+      <h1><a href="index.html">$title$</a>$if(description)$<br><small>$description$</small>$endif$</h1>
+$if(nav)$
+      <nav><p>$for(nav)$<a href="$nav.href$">$nav.label$</a>$sep$ / $endfor$</p></nav>
+$endif$
+      <hr>
+    </div>
+  </header>
+
+  <main>
+$if(toc)$
+    <section>
+      <details>
+        <summary>Page contents</summary>
+        <nav role="doc-toc">$table-of-contents$</nav>
+      </details>
+    </section>
+$endif$
+    <section>
+$body$
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <hr>
+      <p><b><a href="index.html">$title$</a></b>$if(description)$ - $description$$endif$</p>
+$if(nav)$
+      <nav><p>$for(nav)$<a href="$nav.href$">$nav.label$</a>$sep$ / $endfor$</p></nav>
+$endif$
+      <p class="themeform"></p>
+      <div id="codehighlighter"></div>
+    </div>
+  </footer>
+
+$if(theme.script)$
+$for(theme.script)$
+  <script src="$theme.script$"></script>
+$endfor$
+$endif$
+$if(script)$
+$for(script)$
+  <script src="$script$"></script>
+$endfor$
+$endif$
+</body>
+
+</html>
