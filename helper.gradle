@@ -1,0 +1,141 @@
+/* groovylint-disable JavaIoPackageAccess */
+
+/* groovylint-disable-next-line CompileStatic */
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.commonmark:commonmark:0.23.0'
+        classpath 'org.commonmark:commonmark-ext-footnotes:0.23.0'
+    }
+}
+
+import org.commonmark.Extension
+import org.commonmark.node.AbstractVisitor
+import org.commonmark.node.Link
+import org.commonmark.node.Node
+import org.commonmark.node.Text
+import org.commonmark.parser.Parser
+import org.commonmark.renderer.markdown.MarkdownRenderer
+import org.commonmark.ext.footnotes.FootnotesExtension
+
+// Commonmark does not support YAML headers. This method separates the header
+// from the content and returns a list with both.
+List<String> splitFromHeader(String markdown) {
+    String header = markdown.find(~/^---\n.*\n---\n/) ?: ''
+    String content = markdown.replaceFirst(~/^---\n.*\n---\n/, '')
+
+    return [header, content]
+}
+
+// Commonmark will escape special characters unless told so. These tags mark the
+// start and end of Markdown code with characters that should be unescaped.
+String startUnescape = ':startunescape:'
+String endUnescape = ':endunescape:'
+
+// Recursively find math content between `$` characters and tag it so that it
+// can be unescaped after rendering the document.
+void tagEscapedMath(Node node, String startTag, String endTag) {
+    if (node == null) {
+        // Assuming that the document node was not null, the node has no childs
+        // and/or no siblings. The document has been fully traversed.
+        return
+    }
+
+    if (node.class == Text) {
+        /* groovylint-disable-next-line UnnecessaryGetter */
+        String literal = node.getLiteral()
+        String dollar = '$'
+
+        if (literal.startsWith(dollar) && literal.endsWith(dollar)) {
+            /* groovylint-disable-next-line UnnecessarySetter */
+            node.setLiteral("${startTag}${literal}${endTag}")
+        }
+    }
+
+    /* groovylint-disable-next-line UnnecessaryGetter */
+    tagEscapedMath(node.getFirstChild(), startTag, endTag)
+    /* groovylint-disable-next-line UnnecessaryGetter */
+    tagEscapedMath(node.getNext(), startTag, endTag)
+}
+
+// Unescape the Markdown content previously marked by `tagEscapedMath`.
+String unescapeTaggedMath(String markdown, String startTag, String endTag) {
+    String backslashTag = ':backslash:'
+    String backslashChar = '\\\\'
+
+    // Replace "\\" for `backslashTag`, remove "\" and replace `backslashTag`
+    // for "\". Original "\\" become "\" and original "\" have been removed.
+    return markdown.replaceAll(~/${startTag}(.*)${endTag}/) { all, group ->
+        group
+            .replaceAll('\\\\\\\\', backslashTag)
+            .replaceAll(backslashChar, '')
+            .replaceAll(backslashTag, backslashChar)
+    }
+}
+
+// Changes links with `*.md` renferences to `*.html` if the Markdown file is
+// present in `files`, meaning that it will be converted to HTML.
+/* groovylint-disable-next-line CompileStatic */
+class LinkVisitor extends AbstractVisitor {
+
+    // Markdown files that will be converted to HTML.
+    List<String> files
+
+    LinkVisitor(List<File> files) {
+        this.files = []
+        files.each { file -> this.files << file.name }
+    }
+
+    @Override
+    void visit(Link link) {
+        String href = link.destination
+        String prefix = href.find(~/^\//) ?: '' // Part before the file name.
+        String suffix = href.find(~/#.*$/) ?: '' // Part after the file name.
+        String name = href
+            .replaceFirst(~/^\//, '') // Remove first '/'.
+            .replaceFirst(~/#.*$/, '') // Remove the ID at the end.
+
+        if (name in files) {
+            name = name.replaceFirst(~/\.md$/, '.html')
+            link.destination = "${prefix}${name}${suffix}"
+        }
+    }
+
+}
+
+List<Extension> footnotesExtension = List.of(FootnotesExtension.create())
+
+Parser parser = Parser.builder()
+    .extensions(footnotesExtension)
+    .build()
+
+MarkdownRenderer renderer = MarkdownRenderer.builder()
+    .extensions(footnotesExtension)
+    .build()
+
+configure(project.rootProject) {
+    ext {
+        prepare = { String inputPath, String outputPath, List<File> files ->
+            String text = new File(inputPath).getText('UTF-8')
+            List<String> layout = splitFromHeader(text)
+            String header = layout[0]
+            String content = layout[1]
+
+            Node document = parser.parse(content)
+            // Check for links that need to be changed, and update them.
+            LinkVisitor linkVisitor = new LinkVisitor(files)
+            document.accept(linkVisitor)
+            // Find math content that needs to be unescaped after rendering.
+            tagEscapedMath(document, startUnescape, endUnescape)
+
+            String markdown = renderer.render(document)
+            // Unescape math content.
+            markdown = unescapeTaggedMath(markdown, startUnescape, endUnescape)
+
+            File output = new File(outputPath)
+            output.write("${header}${markdown}")
+        }
+    }
+}

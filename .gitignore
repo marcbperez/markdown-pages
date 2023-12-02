@@ -1,2 +1,5 @@
-docs
+# Ignore Gradle cache directory.
 .gradle
+
+# Ignore temporary build directory.
+tmp
