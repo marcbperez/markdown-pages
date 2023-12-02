@@ -5,6 +5,8 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+## 0.10.0 - 2023-12-2
+
 ### Added
 
   - Site build for this project.
