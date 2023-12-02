@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>markdown-pages</title>
+  <meta name="author" content="Marc B. Perez">
+  <meta name="description" content="Static Site Generator for Markdown">
+  <meta name="keywords" content="markdown-pages,Static Site
+Generator,Markdown,Preact,Gradle,Pandoc,Spock,Prism">
+  <link rel="alternate" type="application/rss+xml" href="/rss.xml">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/theme/style.css">
+  <link rel="stylesheet" href="/theme/ThemeForm.css">
+  <link rel="stylesheet" href="/theme/CodeHighlighter.css">
+  <script type="module" src="/theme/ThemeForm.js"></script>
+  <script type="module" src="/theme/CodeHighlighter.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-bash.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-python.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-markdown.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-yaml.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+</head>
+
+<body class="detect light medium serif">
+  <header>
+    <div>
+      <p class="themeform"></p>
+      <h1><a href="index.html">markdown-pages</a><br><small>Static Site
+Generator for Markdown</small></h1>
+      <nav><p><a href="/index.html">Home</a> / <a href="/tutorial.html">Tutorial</a> / <a href="/elements.html">Elements</a> / <a href="/README.html">Readme</a> / <a href="/CHANGELOG.html">Change
+Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <a href="/rss.xml">RSS</a> / <a href="/sitemap.xml">Sitemap</a></p></nav>
+      <hr>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <details>
+        <summary>Page contents</summary>
+        <nav role="doc-toc"><ul>
+<li><a href="#elements" id="toc-elements">Elements</a>
+<ul>
+<li><a href="#text" id="toc-text">Text</a></li>
+<li><a href="#headings" id="toc-headings">Headings</a></li>
+<li><a href="#quote" id="toc-quote">Quote</a></li>
+<li><a href="#definition" id="toc-definition">Definition</a></li>
+<li><a href="#list" id="toc-list">List</a></li>
+<li><a href="#ordered-list" id="toc-ordered-list">Ordered list</a></li>
+<li><a href="#checklist" id="toc-checklist">Checklist</a></li>
+<li><a href="#link" id="toc-link">Link</a></li>
+<li><a href="#image" id="toc-image">Image</a></li>
+<li><a href="#table" id="toc-table">Table</a></li>
+<li><a href="#separator" id="toc-separator">Separator</a></li>
+<li><a href="#footnote" id="toc-footnote">Footnote</a></li>
+<li><a href="#code" id="toc-code">Code</a></li>
+<li><a href="#math" id="toc-math">Math</a></li>
+<li><a href="#html" id="toc-html">HTML</a></li>
+</ul></li>
+</ul></nav>
+      </details>
+    </section>
+    <section>
+<h1 id="elements">Elements</h1>
+<p>A list of all the elements that can be used in Markdown documents to
+show content. Read the <a href="/tutorial.html">tutorial</a> first if
+you want to know how they are used to generate web pages.</p>
+<h2 id="text">Text</h2>
+<pre class="markdown"><code>**Bold**, *italics* or ~~strikethrough~~, with multiple lines.\
+Subscript H~2~O or superscript X^2^.</code></pre>
+<p><strong>Bold</strong>, <em>italics</em> or <del>strikethrough</del>,
+with multiple lines.<br />
+Subscript H<sub>2</sub>O or superscript X<sup>2</sup>.</p>
+<h2 id="headings">Headings</h2>
+<pre class="markdown"><code># Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6</code></pre>
+<h1>
+Heading 1
+</h1>
+<h2>
+Heading 2
+</h2>
+<h3>
+Heading 3
+</h3>
+<h4>
+Heading 4
+</h4>
+<h5>
+Heading 5
+</h5>
+<h6>
+Heading 6
+</h6>
+<h2 id="quote">Quote</h2>
+<pre class="markdown"><code>&gt; A section that is quoted from another source.
+&gt; The continuation of the text.</code></pre>
+<blockquote>
+<p>A section that is quoted from another source. The continuation of the
+text.</p>
+</blockquote>
+<h2 id="definition">Definition</h2>
+<pre class="markdown"><code>Term name:
+: Term definition.</code></pre>
+<dl>
+<dt>Term name:</dt>
+<dd>
+Term definition.
+</dd>
+</dl>
+<h2 id="list">List</h2>
+<pre class="markdown"><code>- Item A
+- Item B
+- Item C</code></pre>
+<ul>
+<li>Item A</li>
+<li>Item B</li>
+<li>Item C</li>
+</ul>
+<h2 id="ordered-list">Ordered list</h2>
+<pre class="markdown"><code>1. First item
+2. Second item
+3. Third item</code></pre>
+<ol type="1">
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ol>
+<h2 id="checklist">Checklist</h2>
+<pre class="markdown"><code>- [x] Task 1
+- [x] Task 2
+- [ ] Task 3</code></pre>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Task 1</label></li>
+<li><label><input type="checkbox" checked="" />Task 2</label></li>
+<li><label><input type="checkbox" />Task 3</label></li>
+</ul>
+<h2 id="link">Link</h2>
+<pre class="markdown"><code>[Link](/elements.html) to this page.</code></pre>
+<p><a href="/elements.html">Link</a> to this page.</p>
+<h2 id="image">Image</h2>
+<pre class="markdown"><code>![Small image depicting a page.](assets/favicon.ico &quot;Page icon&quot;)</code></pre>
+<figure>
+<img src="assets/favicon.ico" title="Page icon"
+alt="Small image depicting a page." />
+<figcaption aria-hidden="true">Small image depicting a
+page.</figcaption>
+</figure>
+<pre class="markdown"><code>This is an inline image: ![Small image depicting a page.](assets/favicon.ico &quot;Page icon&quot;).</code></pre>
+<p>This is an inline image: <img src="assets/favicon.ico"
+title="Page icon" alt="Small image depicting a page." />.</p>
+<p>The title at the end, <code>"Page icon"</code>, is optional and can
+be used for styling.</p>
+<pre class="css"><code>img[title$=&quot;icon&quot;] {
+  border: 1px solid black;
+}</code></pre>
+<h2 id="table">Table</h2>
+<pre class="markdown"><code>| Left-aligned | Center-aligned | Right-aligned | 
+| :----------- | :------------: | ------------: |
+| 10           | Red, blue.     | Done          |
+| 256          | Red, yellow.   | Pending       |</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Left-aligned</th>
+<th style="text-align: center;">Center-aligned</th>
+<th style="text-align: right;">Right-aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: center;">Red, blue.</td>
+<td style="text-align: right;">Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">256</td>
+<td style="text-align: center;">Red, yellow.</td>
+<td style="text-align: right;">Pending</td>
+</tr>
+</tbody>
+</table>
+<h2 id="separator">Separator</h2>
+<pre class="markdown"><code>---</code></pre>
+<p>See the horizontal rules between the header, content and footer of
+this page.</p>
+<h2 id="footnote">Footnote</h2>
+<pre class="markdown"><code>Here&#39;s a sentence with a footnote, the footnote itself must be defined at
+the bottom of the document. [^1]</code></pre>
+<p>Here’s a sentence with a footnote, the footnote itself must be
+defined at the bottom of the document. <a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<pre class="markdown"><code>[^1]: This is the footnote itself.</code></pre>
+<h2 id="code">Code</h2>
+<pre class="markdown"><code>This is an inline code block: `user = &quot;dev&quot;`.</code></pre>
+<p>This is an inline code block: <code>user = "dev"</code>.</p>
+<p>In the pre-installed template, code highlighting is done by <a
+href="https://prismjs.com/">Prism</a>.</p>
+<pre class="markdown"><code>```
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      h1 {
+        color: blue;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Code highlighter&lt;/h1&gt;
+    &lt;script&gt;
+      for (let i = 0; i &lt; 10; i++) {
+        alert(i);
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```</code></pre>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      h1 {
+        color: blue;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Code highlighter&lt;/h1&gt;
+    &lt;script&gt;
+      for (let i = 0; i &lt; 10; i++) {
+        alert(i);
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The language can be specified in the first line, like
+<code>```markup</code>. The available languages are <code>markup</code>,
+shown above and by default, <code>bash</code>, <code>css</code>,
+<code>javascript</code>, <code>markdown</code>, <code>python</code> and
+<code>yaml</code>. New languages can be added to the <code>module</code>
+list of the page metadata.</p>
+<pre class="yaml"><code>module:
+  - https://esm.sh/prismjs/components/prism-rust.min.js</code></pre>
+<h2 id="math">Math</h2>
+<pre class="markdown"><code>$a^2 + b^2 = c^2$
+
+$v(t) = v_0 + \frac{1}{2}at^2$
+
+$\gamma = \frac{1}{\sqrt{1 - v^2/c^2}}$  
+
+$\int_{0}^{1} x dx = \left[ \frac{1}{2}x^2 \right]_{0}^{1} = \frac{1}{2}$
+
+$e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = \lim_{n\rightarrow\infty} (1+x/n)^n$</code></pre>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">a^2 + b^2 = c^2</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>v</mi><mn>0</mn></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">v(t) = v_0 + \frac{1}{2}at^2</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mfrac><mn>1</mn><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>v</mi><mn>2</mn></msup><mi>/</mi><msup><mi>c</mi><mn>2</mn></msup></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\gamma = \frac{1}{\sqrt{1 - v^2/c^2}}</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mi>x</mi><mi>d</mi><mi>x</mi><mo>=</mo><msubsup><mrow><mo stretchy="true" form="prefix">[</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mn>0</mn><mn>1</mn></msubsup><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\int_{0}^{1} x dx = \left[ \frac{1}{2}x^2 \right]_{0}^{1} = \frac{1}{2}</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi>∞</mi></msubsup><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mi>n</mi><mi>!</mi></mrow></mfrac><mo>=</mo><msub><mo>lim</mo><mrow><mi>n</mi><mo>→</mo><mi>∞</mi></mrow></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mi>/</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = \lim_{n\rightarrow\infty} (1+x/n)^n</annotation></semantics></math></p>
+<h2 id="html">HTML</h2>
+<pre class="markdown"><code>Text with &lt;small&gt;smaller&lt;/small&gt; text inside.
+
+&lt;div&gt;
+  &lt;p&gt;All content inside an HTML element must be HTML.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>Text with <small>smaller</small> text inside.</p>
+<div>
+<p>
+All content inside an HTML element must be HTML.
+</p>
+</div>
+<aside id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is the footnote itself.<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <hr>
+      <p><b><a href="index.html">markdown-pages</a></b> - Static Site
+Generator for Markdown</p>
+      <nav><p><a href="/index.html">Home</a> / <a href="/tutorial.html">Tutorial</a> / <a href="/elements.html">Elements</a> / <a href="/README.html">Readme</a> / <a href="/CHANGELOG.html">Change
+Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <a href="/rss.xml">RSS</a> / <a href="/sitemap.xml">Sitemap</a></p></nav>
+      <p class="themeform"></p>
+      <div id="codehighlighter"></div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
