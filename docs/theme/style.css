@@ -1,0 +1,292 @@
+/* Minimal template with light and dark themes, configurable font family and
+size, and optional full-width layout. */
+
+:root {
+  /* Small devices (landscape phones). */
+  --screen-small: 576px;
+  /* Medium devices (tablets). */
+  --screen-medium: 768px;
+  /* Large devices (desktops). */
+  --screen-large: 992px;
+  /* Extra large devices (large desktops). */
+  --screen-xlarge: 1200px;
+  /* Default layout and font parameters. */
+  --min-width: 320px;
+  --max-width: 640px;
+  --spacing-small: 0.5em;
+  --spacing-medium: 1em;
+  --spacing-large: 2em;
+  --font-size-small: 12px;
+  --font-size-medium: 14px;
+  --font-size-large: 16px;
+  --font-family-monospace: 'Courier New', Courier, monospace;
+  --font-family-sans-serif: Verdana, Geneva, Tahoma, sans-serif;
+  --font-family-serif: Georgia, 'Times New Roman', Times, serif;
+  /* Light theme parameters: */
+  --light-background: rgb(255, 255, 255);
+  /* Dark theme parameters: */
+  --dark-background: rgb(24, 24, 24);
+  --dark-color: rgb(255, 255, 255);
+  --dark-link-color: rgb(137, 207, 110);
+  --dark-hover-color: rgb(172, 236, 147);
+  --dark-visited-color: rgb(172, 236, 147);
+}
+
+/* Small devices (landscape phones). */
+@media (min-width: var(--screen-small)) {}
+
+/* Medium devices (tablets). */
+@media (min-width: var(--screen-medium)) {}
+
+/* Large devices (desktops). */
+@media (min-width: var(--screen-large)) {}
+
+/* Extra large devices (large desktops). */
+@media (min-width: var(--screen-xlarge)) {}
+
+/* Body theming: */
+
+body.small {
+  font-size: var(--font-size-small);
+}
+
+body.medium {
+  font-size: var(--font-size-medium);
+}
+
+body.large {
+  font-size: var(--font-size-large);
+}
+
+body.monospace {
+  font-family: var(--font-family-monospace);
+}
+
+body.sans-serif {
+  font-family: var(--font-family-sans-serif);
+}
+
+body.serif {
+  font-family: var(--font-family-serif);
+}
+
+body.dark {
+  background: var(--dark-background);
+  color: var(--dark-color);
+}
+
+body.dark a {
+  color: var(--dark-link-color);
+}
+
+body.dark a:hover {
+  color: var(--dark-hover-color);
+}
+
+body.dark a:visited {
+  color: var(--dark-visited-color);
+}
+
+/* Layout of body, header, main and footer: */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  line-height: 1.5em;
+}
+
+body.stretch header,
+body.stretch main,
+body.stretch footer {
+  max-width: 100%;
+}
+
+header,
+main,
+footer {
+  width: 100%;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+  overflow-wrap: break-word;
+}
+
+header>div,
+main>section,
+footer>div {
+  margin-right: var(--spacing-medium);
+  margin-left: var(--spacing-medium);
+}
+
+/* Navigation links: */
+
+nav p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+}
+
+/* Dividers: */
+
+hr {
+  opacity: 0.2;
+  margin: 1.5em 0;
+  border-top: 1px solid;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  width: 45%;
+}
+
+/* Headers: */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1em;
+  line-height: 1em;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1em;
+}
+
+header h1 {
+  font-size: 1.5em;
+}
+
+main section>h1:first-child {
+  margin-top: 0;
+}
+
+/* Citations: */
+
+blockquote {
+  margin-right: 0;
+  margin-left: var(--spacing-large);
+}
+
+blockquote p {
+  border-left: var(--spacing-small) solid;
+  padding-left: var(--spacing-medium);
+}
+
+/* Lists: */
+
+ul {
+  list-style-type: '‒  ';
+}
+
+ul,
+ol {
+  padding-left: 3em;
+}
+
+ul>li,
+ol>li {
+  padding-left: var(--spacing-small);
+}
+
+/* Tables: */
+
+table {
+  margin: var(--spacing-medium) 0;
+  width: 100%;
+}
+
+table,
+table th,
+table td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: var(--spacing-small);
+}
+
+/* Images: */
+
+img[alt$="cover"] {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+/* Only inverted in light theme. */
+body.light img[alt*="light inverted"] {
+  filter: invert(1);
+}
+
+/* Only inverted in dark theme. */
+body.dark img[alt*="dark inverted"] {
+  filter: invert(1);
+}
+
+figure {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* Forms: */
+
+select,
+button {
+  margin: 0;
+  border: 0;
+  border-radius: 0.3em;
+  background: rgba(127, 127, 127, 0.1);
+  padding: 0.3em;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  width: 1em;
+  height: 1em;
+  font-size: inherit;
+}
+
+/* Table of contents: */
+
+details summary {
+  margin-bottom: var(--spacing-medium);
+  cursor: pointer;
+}
+
+nav[role="doc-toc"] {
+  position: absolute;
+  z-index: 1;
+  margin-right: var(--spacing-medium);
+  border: 1px solid;
+  padding-right: var(--spacing-medium);
+}
+
+body.light nav[role="doc-toc"] {
+  background-color: var(--light-background);
+}
+
+body.dark nav[role="doc-toc"] {
+  background-color: var(--dark-background);
+}

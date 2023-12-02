@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>markdown-pages</title>
+  <meta name="author" content="Marc B. Perez">
+  <meta name="description" content="Static Site Generator for Markdown">
+  <meta name="keywords" content="markdown-pages,Static Site
+Generator,Markdown,Preact,Gradle,Pandoc,Spock,Prism">
+  <link rel="alternate" type="application/rss+xml" href="/rss.xml">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="/theme/style.css">
+  <link rel="stylesheet" href="/theme/ThemeForm.css">
+  <link rel="stylesheet" href="/theme/CodeHighlighter.css">
+  <script type="module" src="/theme/ThemeForm.js"></script>
+  <script type="module" src="/theme/CodeHighlighter.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-bash.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-python.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-markdown.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/components/prism-yaml.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script type="module" src="https://esm.sh/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+</head>
+
+<body class="detect light medium serif">
+  <header>
+    <div>
+      <p class="themeform"></p>
+      <h1><a href="index.html">markdown-pages</a><br><small>Static Site
+Generator for Markdown</small></h1>
+      <nav><p><a href="/index.html">Home</a> / <a href="/tutorial.html">Tutorial</a> / <a href="/elements.html">Elements</a> / <a href="/README.html">Readme</a> / <a href="/CHANGELOG.html">Change
+Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <a href="/rss.xml">RSS</a> / <a href="/sitemap.xml">Sitemap</a></p></nav>
+      <hr>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <details>
+        <summary>Page contents</summary>
+        <nav role="doc-toc"><ul>
+<li><a href="#markdown-pages" id="toc-markdown-pages">markdown-pages</a>
+<ul>
+<li><a href="#installation" id="toc-installation">Installation</a></li>
+<li><a href="#usage" id="toc-usage">Usage</a></li>
+<li><a href="#testing" id="toc-testing">Testing</a></li>
+<li><a href="#deployment" id="toc-deployment">Deployment</a></li>
+<li><a href="#troubleshooting"
+id="toc-troubleshooting">Troubleshooting</a></li>
+<li><a href="#contributing" id="toc-contributing">Contributing</a></li>
+<li><a href="#credits" id="toc-credits">Credits</a></li>
+<li><a href="#license" id="toc-license">License</a></li>
+</ul></li>
+</ul></nav>
+      </details>
+    </section>
+    <section>
+<h1 id="markdown-pages">markdown-pages</h1>
+<p>A Static Site Generator for Markdown powered by Gradle, Pandoc,
+Spock, Preact and a minimalistic template.</p>
+<h2 id="installation">Installation</h2>
+<p>Clone the sources in Debian with Java 18 or newer and install the
+project dependencies. Information on how to install Java can be found in
+the <a href="https://wiki.debian.org/Java#Quick_Install_Guide">official
+documentation</a>.</p>
+<pre class="bash"><code>git clone https://github.com/marcbperez/markdown-pages
+cd markdown-pages
+sudo ./gradlew install</code></pre>
+<p>For end users, <code>install.sh</code> downloads a tarball of the
+release, runs the full installation process and adds
+<code>bin/markdown-pages</code> to the path.</p>
+<h2 id="usage">Usage</h2>
+<p>For continuous integration and development use the Gradle wrapper.
+Without parameters, it will build the project into the <code>docs</code>
+folder and run tests. The <code>serve</code> task will use the build
+folder to start a development server at <a
+href="http://localhost:8000">http://localhost:8000</a>.</p>
+<pre class="bash"><code>./gradlew
+./gradlew serve</code></pre>
+<p>For a continuous build use <code>./gradlew --continuous</code>. For a
+full list of tasks, see <code>./gradlew tasks --all</code>. Without the
+wrapper use Gradle directly. This will create it in case it is not
+present. The equivalent commands use <code>gradle</code> instead of
+<code>./gradlew</code>. Information on how to install Gradle can be
+found in the <a href="install-gradle">official documentation</a>.</p>
+<p>The <code>bin/markdown-pages</code> script runs a continuous build
+and serves the results at the same time using the wrapper. It can
+replace the commands described above and works from any directory.</p>
+<pre class="bash"><code>export PATH=$(pwd)/bin:$PATH
+mkdir ~/my-site
+cd ~/my-site
+echo &quot;# Home&quot; &gt; index.md
+markdown-pages</code></pre>
+<h2 id="testing">Testing</h2>
+<p>Test checks are executed automatically every time the project is
+built. To run them manually use the <code>./gradlew test</code> command.
+It will execute all the Spock tests from the <code>test</code> folder
+whose names match <code>test/**/*Spec.groovy</code>.</p>
+<h2 id="deployment">Deployment</h2>
+<p>The generated site can be deployed to any HTTP server by uploading
+the <code>docs</code> folder and using it as the public directory.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>The <a
+href="https://github.com/marcbperez/markdown-pages/issues">issue
+tracker</a> intends to manage and compile bugs, enhancements, proposals
+and tasks. Reading through its material or reporting to its contributors
+via the platform is strongly recommended.</p>
+<h2 id="contributing">Contributing</h2>
+<p>This project adheres to <a href="http://semver.org">Semantic
+Versioning</a> and to certain syntax conventions defined in <a
+href="/.editorconfig">.editorconfig</a>. To get a list of changes refer
+to the <a href="/CHANGELOG.html">CHANGELOG</a>. Only branches prefixed
+by <em>feature-</em>, <em>hotfix-</em>, or <em>release-</em> will be
+considered:</p>
+<ul>
+<li>Fork the project.</li>
+<li>Create your new branch:
+<code>git checkout -b feature-my-feature develop</code></li>
+<li>Commit your changes:
+<code>git commit -am 'Added my new feature.'</code></li>
+<li>Push the branch:
+<code>git push origin feature-my-feature</code></li>
+<li>Submit a pull request.</li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p>This project was created by <a
+href="https://marcbperez.github.io">Marc B. Perez</a> and maintained by
+its <a href="https://marcbperez.github.io">author</a> and
+contributors.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the <a href="/LICENSE">Apache License
+Version 2.0</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <hr>
+      <p><b><a href="index.html">markdown-pages</a></b> - Static Site
+Generator for Markdown</p>
+      <nav><p><a href="/index.html">Home</a> / <a href="/tutorial.html">Tutorial</a> / <a href="/elements.html">Elements</a> / <a href="/README.html">Readme</a> / <a href="/CHANGELOG.html">Change
+Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <a href="/rss.xml">RSS</a> / <a href="/sitemap.xml">Sitemap</a></p></nav>
+      <p class="themeform"></p>
+      <div id="codehighlighter"></div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

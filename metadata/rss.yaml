@@ -1,0 +1,46 @@
+---
+# RSS feed metadata, configures the output of the RSS feed.
+# `channel`, `channel.link`, `channel.title`, `channel.description`,
+# `item.link`, `item.title` and `item.description` are required. `item.link`,
+# `image.url` and `enclosure.url` are relative to `channel.link`.
+# `item.enclosure.length` is in bytes.
+
+channel:
+  link: https://marcbperez.github.io/markdown-pages
+  title: markdown-pages
+  description: Static Site Generator for Markdown
+item:
+  - link: /
+    title: Home
+    description: The Home page, with instructions on how to install and get
+      started with markdown-pages, is now available online.
+    pubDate: 2 Dec 2023
+    author: Marc B. Perez
+
+  - link: /tutorial.html
+    title: Tutorial
+    description: The Tutorial page, with a step-by-step guide to markdown-pages,
+      is now available online.
+    pubDate: 2 Dec 2023
+    author: Marc B. Perez
+
+  - link: /elements.html
+    title: Elements
+    description: The Elements page, with a list of elements supported by the
+      pages, is now available online.
+    pubDate: 2 Dec 2023
+    author: Marc B. Perez
+
+  - link: /README.html
+    title: README
+    description: The README, for developers, is now available online.
+    pubDate: 2 Dec 2023
+    author: Marc B. Perez
+
+  - link: /CHANGELOG.html
+    title: CHANGELOG
+    description: The CHANGELOG, for developers, is now available online.
+    pubDate: 2 Dec 2023
+    author: Marc B. Perez
+---
+

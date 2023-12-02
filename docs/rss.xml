@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+
+<title>markdown-pages</title>
+<link>https://marcbperez.github.io/markdown-pages</link>
+<description>Static Site Generator for Markdown</description>
+
+<item>
+  <title>Home</title>
+  <link>https://marcbperez.github.io/markdown-pages/</link>
+  <description>The Home page, with instructions on how to install and
+get started with markdown-pages, is now available online.</description>
+  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/</guid>
+  <author>Marc B. Perez</author>
+  <pubDate>2 Dec 2023</pubDate>
+</item>
+<item>
+  <title>Tutorial</title>
+  <link>https://marcbperez.github.io/markdown-pages/tutorial.html</link>
+  <description>The Tutorial page, with a step-by-step guide to
+markdown-pages, is now available online.</description>
+  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/tutorial.html</guid>
+  <author>Marc B. Perez</author>
+  <pubDate>2 Dec 2023</pubDate>
+</item>
+<item>
+  <title>Elements</title>
+  <link>https://marcbperez.github.io/markdown-pages/elements.html</link>
+  <description>The Elements page, with a list of elements supported by
+the pages, is now available online.</description>
+  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/elements.html</guid>
+  <author>Marc B. Perez</author>
+  <pubDate>2 Dec 2023</pubDate>
+</item>
+<item>
+  <title>README</title>
+  <link>https://marcbperez.github.io/markdown-pages/README.html</link>
+  <description>The README, for developers, is now available
+online.</description>
+  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/README.html</guid>
+  <author>Marc B. Perez</author>
+  <pubDate>2 Dec 2023</pubDate>
+</item>
+<item>
+  <title>CHANGELOG</title>
+  <link>https://marcbperez.github.io/markdown-pages/CHANGELOG.html</link>
+  <description>The CHANGELOG, for developers, is now available
+online.</description>
+  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/CHANGELOG.html</guid>
+  <author>Marc B. Perez</author>
+  <pubDate>2 Dec 2023</pubDate>
+</item>
+
+</channel>
+</rss>

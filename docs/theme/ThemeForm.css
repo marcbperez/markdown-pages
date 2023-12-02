@@ -1,0 +1,19 @@
+/* Styling for ThemeForm.js. */
+
+.themeform>form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-small) var(--spacing-medium);
+}
+
+.themeform>form>div {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.themeform>form>div input[type="checkbox"] {
+  position: relative;
+  top: -1px;
+}

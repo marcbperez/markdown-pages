@@ -5,6 +5,23 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+## 0.10.0 - 2023-12-2
+
+### Added
+
+  - Site build for this project.
+  - Spock cases for this project.
+  - Minimalistic theme and pages for this project.
+  - The new build pipeline and install script.
+
+### Changed
+
+  - The editor configuration, CHANGELOG and README.
+
+### Removed
+
+  - All the files from the previous version.
+
 ## 0.9.1 - 2017-11-25
 
 ### Fixed
@@ -17,7 +34,7 @@ project adheres to [Semantic Versioning](http://semver.org).
 ### Added
 
   - Dynamic template and metadata in build script.
-  - Default metadata in its own folder.
+  - Default metadata in its folder.
   - Default template.
   - Style for dark HR elements.
   - Gradle wrapper for this project.
@@ -34,7 +51,7 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ### Fixed
 
-  - Erratas on README description and project usage.
+  - Errata on README description and project usage.
   - Scripts, style and template.
 
 ## 0.8.1 - 2017-05-12
@@ -42,15 +59,15 @@ project adheres to [Semantic Versioning](http://semver.org).
 ### Fixed
 
   - Build script with background serve task.
-  - Build information and erratas in README usage.
-  - Google Analytics tracking code in main template.
+  - Build information and errata in README usage.
+  - Google Analytics tracking code in the main template.
 
 ## 0.8.0 - 2017-04-18
 
 ### Changed
 
   - Build folder to docs.
-  - Ignored new build folder.
+  - Ignored the new build folder.
   - Gradle wrapper for this project.
   - Project usage and instructions.
 
@@ -98,7 +115,7 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ### Changed
 
-  - The docker-compose script using an external builder image.
+  - The docker-compose script uses an external builder image.
 
 ## 0.5.0 - 2017-01-13
 
