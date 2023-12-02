@@ -1,0 +1,349 @@
+/* groovylint-disable DuplicateNumberLiteral, DuplicateStringLiteral, JavaIoPackageAccess */
+
+/* groovylint-disable-next-line CompileStatic */
+apply from: 'helper.gradle'
+
+/* groovylint-disable-next-line CompileStatic */
+defaultTasks 'wrapper', 'watch', 'clean', 'build', 'test'
+
+// APT dependencies needed for this pipeline.
+List<String> aptPackages = ['libspock-java', 'pandoc', 'inotify-tools']
+
+// The directory from where this pipeline is being executed.
+String path = System.getProperty('user.dir')
+// Directory that contains the sources to be converted to a website.
+String srcDir = "${path}"
+// Directory that contains Spock tests for this pipeline.
+String testDir = "${path}/test"
+// Directory where the website will be generated.
+String buildDir = "${path}/docs"
+// Directory where the sources will be prepared.
+String tempDir = "${path}/tmp"
+// Directory that contains the project theme.
+String themeDir = "${path}/theme"
+// Directory that contains the fallback theme from this pipeline.
+String projectThemeDir = "${projectDir}/theme"
+
+// Files from `srcDir` that will be copied directly.
+List<String> copyFiles = ['*.html']
+// Add the files listed in `.include` too.
+if (file("${srcDir}/.include").exists()) {
+    copyFiles = copyFiles + file("${srcDir}/.include").text.readLines()
+}
+
+// Files from `srcDir` that will not be converted.
+List<String> excludeFiles = ['*.draft.*']
+// Add the files listed in `.exclude` too.
+if (file("${srcDir}/.exclude").exists()) {
+    excludeFiles = excludeFiles + file("${srcDir}/.exclude").text.readLines()
+}
+
+// Markdown documents in `srcDir` that will be converted to HTML.
+List<File> markdownFiles = []
+fileTree(dir: srcDir, include: '*.md', exclude: excludeFiles)
+    .each { File mdFile -> markdownFiles << mdFile }
+
+tasks.named('wrapper') {
+    description 'Creates the project wrapper.'
+    gradleVersion = '8.7'
+
+    doLast {
+        // Windows is not supported.
+        delete "${projectDir}/gradlew.bat"
+    }
+}
+
+task watch(type: Exec) {
+    description 'Watches for changes in continuous mode.'
+
+    inputs.files(
+        fileTree("${srcDir}/metadata"),
+        fileTree("${srcDir}/assets"),
+        fileTree("${srcDir}/theme"),
+        fileTree("${srcDir}/test"),
+        fileTree(srcDir) {
+            include '*.md', '*.html'
+            exclude excludeFiles
+        },
+    )
+
+    commandLine 'true'
+    new ByteArrayOutputStream()
+}
+
+// Runs all tasks with names that start with "install".
+task install {
+    description 'Installs all dependencies.'
+
+    dependsOn {
+        tasks.findAll { task ->
+            task.name.startsWith('install') && !(task.name == 'install')
+        }
+    }
+}
+
+task aptUpdate(type: Exec) {
+    description 'Updates APT repository information.'
+    workingDir path
+    commandLine 'apt-get'
+    args 'update'
+
+    new ByteArrayOutputStream()
+}
+
+task installApt(type: Exec, dependsOn: aptUpdate) {
+    description 'Installs APT dependencies.'
+    workingDir path
+    commandLine 'apt-get'
+    args = ['install', '-y'] + aptPackages
+
+    new ByteArrayOutputStream()
+}
+
+// Runs all tasks with names that start with "clean", and resets the build.
+task clean(type: Delete) {
+    description 'Cleans build and temporary files.'
+    delete buildDir, tempDir
+
+    dependsOn {
+        tasks.findAll { task ->
+            task.name.startsWith('clean') && !(task.name == 'clean')
+        }
+    }
+
+    doLast {
+        new File(buildDir).mkdir()
+        new File(tempDir).mkdir()
+    }
+}
+
+// Runs all tasks with names that start with "build".
+task build {
+    description 'Builds all project sources.'
+
+    dependsOn {
+        tasks.findAll { task ->
+            task.name.startsWith('build') &&
+            !(task.name == 'build') &&
+            !(task.name == 'buildEnvironment')
+        }
+    }
+}
+
+// Creates a build task for every document that can be converted.
+markdownFiles.each { File mdFile ->
+    String fileName = mdFile.name.split('\\.')[0]
+    // Used to give the build task a name.
+    String camelCase = fileName.split('-')*.capitalize().join()
+    // The generated HTML output file.
+    String htmlFile = "${buildDir}/${fileName}.html"
+    // The pre-build file.
+    String tempMd = "${tempDir}/${mdFile.name}"
+
+    // A custom template in my project.
+    String userPageTemplate = "${srcDir}/template/${fileName}.html"
+    String userTemplate = "${srcDir}/template/default.html"
+    // A custom theme in my project.
+    String userThemePageTemplate = "${themeDir}/template/${fileName}.html"
+    String userThemeTemplate = "${themeDir}/template/default.html"
+    // Fallback theme in local release.
+    String themePageTemplate = "${projectThemeDir}/template/${fileName}.html"
+    String themeTemplate = "${projectThemeDir}/template/default.html"
+    // Find the template file for this document:
+    String templateFile
+    if (file(userPageTemplate).exists()) {
+        templateFile = userPageTemplate
+    } else if (file(userTemplate).exists()) {
+        templateFile = userTemplate
+    } else if (file(userThemePageTemplate).exists()) {
+        templateFile = userThemePageTemplate
+    } else if (file(userThemeTemplate).exists()) {
+        templateFile = userThemeTemplate
+    } else if (file(themePageTemplate).exists()) {
+        templateFile = themePageTemplate
+    } else {
+        templateFile = themeTemplate
+    }
+
+    // Fallback theme in local release.
+    String themeMeta = "${projectThemeDir}/metadata/default.yaml"
+    String themePageMeta = "${projectThemeDir}/metadata/${fileName}.yaml"
+    // A custom theme in my project.
+    String userThemeMeta = "${themeDir}/metadata/default.yaml"
+    String userThemePageMeta = "${themeDir}/metadata/${fileName}.yaml"
+    // A custom template in my project.
+    String userMeta = "${srcDir}/metadata/default.yaml"
+    String userPageMeta = "${srcDir}/metadata/${fileName}.yaml"
+    // Find the metadata files for this document:
+    List<String> metadata = ['--metadata-file', themeMeta]
+    if (file(themePageMeta).exists()) {
+        metadata = metadata + ['--metadata-file', themePageMeta]
+    }
+    if (file(userThemeMeta).exists()) {
+        metadata = metadata + ['--metadata-file', userThemeMeta]
+    }
+    if (file(userThemePageMeta).exists()) {
+        metadata = metadata + ['--metadata-file', userThemePageMeta]
+    }
+    if (file(userMeta).exists()) {
+        metadata = metadata + ['--metadata-file', userMeta]
+    }
+    if (file(userPageMeta).exists()) {
+        metadata = metadata + ['--metadata-file', userPageMeta]
+    }
+
+    // Changes the existing Markdown and puts it in a temporary file. Pandoc
+    // will generate the final HTML from this file.
+    task "prepare${camelCase}" {
+        description "Prepares ${mdFile.name} in a temporary file."
+        // See `helper.gradle`.
+        doLast { prepare("${mdFile}", tempMd, markdownFiles) }
+
+        new ByteArrayOutputStream()
+    }
+
+    // Arguments for the Pandoc build.
+    List<String> arguments = ['-s', '-o', htmlFile, tempMd, '-t', 'html5',
+        '--template', templateFile, '--no-highlight', '--toc', '--mathml'] +
+        metadata
+
+    // Convert the temporary Markdown to HTML using Pandoc.
+    task "build${camelCase}"(type: Exec, dependsOn: "prepare${camelCase}") {
+        description "Builds ${mdFile.name} into an HTML page."
+        workingDir path
+        commandLine 'pandoc'
+        args arguments
+
+        new ByteArrayOutputStream()
+    }
+}
+
+// Creates a build task for the sitemap if the metadata exists.
+fileTree(dir: srcDir, include: 'metadata/sitemap.yaml').each { File yamlFile ->
+    String xmlFile = "${buildDir}/sitemap.xml"
+    String metadata = "${srcDir}/metadata/sitemap.yaml"
+
+    // A custom template in my project.
+    String userTemplate = "${srcDir}/template/sitemap.xml"
+    // A custom theme in my project.
+    String userThemeTemplate = "${themeDir}/template/sitemap.xml"
+    // Fallback theme in local release.
+    String themeTemplate = "${projectThemeDir}/template/sitemap.xml"
+    // Find the template file for this document:
+    String templateFile
+    if (file(userTemplate).exists()) {
+        templateFile = userTemplate
+    } else if (file(userThemeTemplate).exists()) {
+        templateFile = userThemeTemplate
+    } else {
+        templateFile = themeTemplate
+    }
+
+    task buildSitemap(type: Exec) {
+        description 'Builds the sitemap.'
+        workingDir path
+        commandLine 'pandoc'
+        args '-s', '-o', xmlFile, '/dev/null', '-t', 'html5', '-f', 'html',
+            '--metadata-file', metadata, '--metadata', 'title="sitemap"',
+            '--template', templateFile, '--no-highlight'
+
+        new ByteArrayOutputStream()
+    }
+}
+
+// Creates a build task for the RSS feed if the metadata exists.
+fileTree(dir: srcDir, include: 'metadata/rss.yaml').each { File yamlFile ->
+    String xmlFile = "${buildDir}/rss.xml"
+    String metadata = "${srcDir}/metadata/rss.yaml"
+
+    // A custom template in my project.
+    String userTemplate = "${srcDir}/template/rss.xml"
+    // A custom theme in my project.
+    String userThemeTemplate = "${themeDir}/template/rss.xml"
+    // Fallback theme in local release.
+    String themeTemplate = "${projectThemeDir}/template/rss.xml"
+    // Find the template file:
+    String templateFile
+    if (file(userTemplate).exists()) {
+        templateFile = userTemplate
+    } else if (file(userThemeTemplate).exists()) {
+        templateFile = userThemeTemplate
+    } else {
+        templateFile = themeTemplate
+    }
+
+    task buildRSS(type: Exec) {
+        description 'Builds the RSS feed.'
+        workingDir path
+        commandLine 'pandoc'
+        args '-s', '-o', xmlFile, '/dev/null', '-t', 'html5', '-f', 'html',
+            '--metadata-file', metadata, '--metadata', 'title="rss"',
+            '--template', templateFile, '--no-highlight'
+
+        new ByteArrayOutputStream()
+    }
+}
+
+task buildTheme(type: Copy) {
+    // Find the assets directory:
+    String assetsDir
+    if (file(themeDir).exists()) {
+        // A custom theme in my project.
+        assetsDir = themeDir
+    } else {
+        // Fallback theme in local release.
+        assetsDir = projectThemeDir
+    }
+
+    description 'Copies the theme assets to the build directory.'
+    from "${assetsDir}/assets"
+    into "${buildDir}/theme"
+}
+
+task buildAssets(type: Copy) {
+    description 'Copies the assets to the build directory.'
+    from "${srcDir}/assets"
+    into "${buildDir}/assets"
+}
+
+task buildCopies(type: Copy) {
+    description 'Copies files to the build directory without changing them.'
+    from srcDir
+    include copyFiles
+    exclude excludeFiles
+    into buildDir
+}
+
+// Runs all tasks with names that start with "test".
+task test {
+    description 'Runs all test cases.'
+
+    dependsOn {
+        tasks.findAll { task ->
+            task.name.startsWith('test') && !(task.name == 'test')
+        }
+    }
+}
+
+// Creates a task for every Spock test.
+fileTree(dir: "${testDir}", include: '**/*Spec.groovy').each { File testFile ->
+    String fileName = testFile.name.split('\\.')[0]
+
+    task "test${fileName}"(type: Exec) {
+        description "Runs the ${fileName} case."
+        workingDir path
+        commandLine 'groovy'
+        args '-cp', '/usr/share/java/spock-core.jar', testFile
+
+        new ByteArrayOutputStream()
+    }
+}
+
+task serve(type: Exec) {
+    description 'Serves the project from a development web server.'
+    workingDir buildDir
+    commandLine 'jwebserver'
+    args '-b', '0.0.0.0', '-p', '8000'
+
+    new ByteArrayOutputStream()
+}

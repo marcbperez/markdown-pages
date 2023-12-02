@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# This script runs a continuous build and serves the results at the same time
+# using the wrapper and `inotifywait`. Press `CTRL+C` to exit. Works from any
+# directory.
+
+# The project directory is always the parent directory of this script.
+PROJECT_DIR=$(realpath $(dirname $0)/..)
+
+# The working directory is the path from where this script was called.
+WORKING_DIR=$(realpath $(pwd))
+
+# Builds the working directory every time its contents change.
+function continuous_build {
+  while true; do
+    # Wait for changes to happen in the working directory.
+    inotifywait -e close_write,moved_to,create -r $WORKING_DIR
+    # Build the working directory after the changes have been detected.
+    $PROJECT_DIR/gradlew --console=plain --project-dir=$PROJECT_DIR
+  done
+}
+
+# When this script exits stop all its subprocessess and daemons.
+trap "trap - SIGTERM && $PROJECT_DIR/gradlew --stop ; kill -- -$$" SIGINT \
+  SIGTERM EXIT
+
+# Build the working directory and wait for it to finish, so that `docs` exists.
+$PROJECT_DIR/gradlew --console=plain --project-dir=$PROJECT_DIR
+
+# In the background, watch for changes and build the working directory.
+continuous_build &
+
+# Start the development web server using `docs` as public folder.
+$PROJECT_DIR/gradlew --console=plain --project-dir=$PROJECT_DIR serve
