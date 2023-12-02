@@ -5,6 +5,21 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+### Added
+
+  - Site build for this project.
+  - Spock cases for this project.
+  - Minimalistic theme and pages for this project.
+  - The new build pipeline and install script.
+
+### Changed
+
+  - The editor configuration, CHANGELOG and README.
+
+### Removed
+
+  - All the files from the previous version.
+
 ## 0.9.1 - 2017-11-25
 
 ### Fixed
