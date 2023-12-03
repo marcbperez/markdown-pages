@@ -43,6 +43,17 @@ List<File> markdownFiles = []
 fileTree(dir: srcDir, include: '*.md', exclude: excludeFiles)
     .each { File mdFile -> markdownFiles << mdFile }
 
+// Maps a file name with its alias, both without extension.
+Map<String, String> rewrites = [:]
+if (file("${srcDir}/.rewrite").exists()) {
+    file("${srcDir}/.rewrite").text.readLines().each { line ->
+        String[] parts = line.split(':')
+        if (parts.length === 2) {
+            rewrites[parts[0]] = parts[1]
+        }
+    }
+}
+
 tasks.named('wrapper') {
     description 'Creates the project wrapper.'
     gradleVersion = '8.7'
@@ -135,10 +146,13 @@ markdownFiles.each { File mdFile ->
     String fileName = mdFile.name.split('\\.')[0]
     // Used to give the build task a name.
     String camelCase = fileName.split('-')*.capitalize().join()
-    // The generated HTML output file.
-    String htmlFile = "${buildDir}/${fileName}.html"
     // The pre-build file.
-    String tempMd = "${tempDir}/${mdFile.name}"
+    String tempMarkdown = "${tempDir}/${mdFile.name}"
+    // The name of the generated HTML file, without the extension.
+    String htmlName = rewrites.containsKey(fileName)
+        ? rewrites[fileName] : fileName
+    // The full path of the generated HTML output file.
+    String htmlFile = "${buildDir}/${htmlName}.html"
 
     // A custom template in my project.
     String userPageTemplate = "${srcDir}/template/${fileName}.html"
@@ -197,15 +211,15 @@ markdownFiles.each { File mdFile ->
     task "prepare${camelCase}" {
         description "Prepares ${mdFile.name} in a temporary file."
         // See `helper.gradle`.
-        doLast { prepare("${mdFile}", tempMd, markdownFiles) }
+        doLast { prepare("${mdFile}", tempMarkdown, markdownFiles, rewrites) }
 
         new ByteArrayOutputStream()
     }
 
     // Arguments for the Pandoc build.
-    List<String> arguments = ['-s', '-o', htmlFile, tempMd, '-t', 'html5',
-        '--template', templateFile, '--no-highlight', '--toc', '--mathml'] +
-        metadata
+    List<String> arguments = ['-s', '-o', htmlFile, tempMarkdown, '-t', 'html5',
+        '--template', templateFile, '--no-highlight', '--toc', '--mathml',
+        '--metadata', "file:${htmlName}.html"] + metadata
 
     // Convert the temporary Markdown to HTML using Pandoc.
     task "build${camelCase}"(type: Exec, dependsOn: "prepare${camelCase}") {
