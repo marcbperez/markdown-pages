@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <base href="https://marcbperez.github.io/markdown-pages/tutorial.html">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <title>markdown-pages</title>
@@ -10,13 +11,13 @@
   <meta name="description" content="Static Site Generator for Markdown">
   <meta name="keywords" content="markdown-pages,Static Site
 Generator,Markdown,Preact,Gradle,Pandoc,Spock,Prism">
-  <link rel="alternate" type="application/rss+xml" href="/rss.xml">
-  <link rel="shortcut icon" href="/assets/favicon.ico">
-  <link rel="stylesheet" href="/theme/style.css">
-  <link rel="stylesheet" href="/theme/ThemeForm.css">
-  <link rel="stylesheet" href="/theme/CodeHighlighter.css">
-  <script type="module" src="/theme/ThemeForm.js"></script>
-  <script type="module" src="/theme/CodeHighlighter.js"></script>
+  <link rel="alternate" type="application/rss+xml" href="rss.xml">
+  <link rel="shortcut icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="theme/style.css">
+  <link rel="stylesheet" href="theme/ThemeForm.css">
+  <link rel="stylesheet" href="theme/CodeHighlighter.css">
+  <script type="module" src="theme/ThemeForm.js"></script>
+  <script type="module" src="theme/CodeHighlighter.js"></script>
   <script type="module" src="https://esm.sh/prismjs/components/prism-bash.min.js"></script>
   <script type="module" src="https://esm.sh/prismjs/components/prism-python.min.js"></script>
   <script type="module" src="https://esm.sh/prismjs/components/prism-markdown.min.js"></script>
@@ -31,8 +32,8 @@ Generator,Markdown,Preact,Gradle,Pandoc,Spock,Prism">
       <p class="themeform"></p>
       <h1><a href="index.html">markdown-pages</a><br><small>Static Site
 Generator for Markdown</small></h1>
-      <nav><p><a href="/index.html">Home</a> / <a href="/tutorial.html">Tutorial</a> / <a href="/elements.html">Elements</a> / <a href="/README.html">Readme</a> / <a href="/CHANGELOG.html">Change
-Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <a href="/rss.xml">RSS</a> / <a href="/sitemap.xml">Sitemap</a></p></nav>
+      <nav><p><span><a href="index.html">Home</a> /</span> <span><a href="tutorial.html">Tutorial</a> /</span> <span><a href="elements.html">Elements</a> /</span> <span><a href="README.html">Readme</a> /</span> <span><a href="CHANGELOG.html">Change
+Log</a> /</span> <span><a href="https://github.com/marcbperez/markdown-pages">Sources</a> /</span> <span><a href="rss.xml">RSS</a></p></nav>
       <hr>
     </div>
   </header>
@@ -65,8 +66,7 @@ Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <
     <section>
 <h1 id="tutorial">Tutorial</h1>
 <p>Install markdown-pages with the <a
-href="/index.html#get-markdown-pages">installation command</a>
-first.</p>
+href="index.html#get-markdown-pages">installation command</a> first.</p>
 <h2 id="sites">Sites</h2>
 <p>In a new folder, add a bit of Markdown to <code>index.md</code> and
 run <code>markdown-pages</code>. <a
@@ -119,9 +119,9 @@ author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
 ---</code></pre>
 <p>The <code>metadata/default.yaml</code> file is applied to all pages,
 but a metadata file for a page will override it. Move the contents of
@@ -136,9 +136,9 @@ is generated from <code>metadata/sitemap.yaml</code>. The required
 parameters are <code>base</code> and <code>url.loc</code>.
 <code>url.loc</code> is relative to <code>base</code>.</p>
 <pre class="yaml"><code>---
-base: https://www.my-website.net
+base: https://www.my-website.net/
 url:
-  - loc: /
+  - loc: index.html
     lastmod: 2024-01-01
     changefreq: monthly
     priority: 0.5
@@ -152,11 +152,11 @@ author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 ---</code></pre>
 <h2 id="feed">Feed</h2>
 <p>The RSS feed at <a
@@ -171,46 +171,46 @@ is generated from <code>metadata/rss.yaml</code>. <code>channel</code>,
 <pre class="yaml"><code>---
 channel:
   title: My website
-  link: https://www.my-website.net
+  link: https://www.my-website.net/
   description: My website in cyberspace
 item:
-  - link: /
+  - link: index.html
     title: Home
     description: My website&#39;s homepage.
 ---</code></pre>
 <p>Set the <code>rss</code> parameter and add a link to the RSS feed in
 the navigation list of <code>metadata/default.yaml</code>.</p>
 <pre class="yaml"><code>---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 ---</code></pre>
 <h2 id="assets">Assets</h2>
 <p>The <code>assets</code> folder can contain anything, it is copied
-entirely to <code>docs</code>. To copy any other file add it to
-<code>.include</code>.</p>
+entirely to <code>docs</code>. To copy any other file add it to a new
+line in <code>.include</code>.</p>
 <pre class="bash"><code>mkdir assets
 echo &quot;There are more than 1 billion websites in cyberspace.&quot; &gt; assets/fact.txt
 echo &quot;This project is open source.&quot; &gt; LICENSE
 echo LICENSE &gt;&gt; .include</code></pre>
 <p>In page documents like <code>index.md</code> files are accessed via
-the <code>/assets</code> route, available at
+the <code>assets</code> route, available at
 <code>http://localhost:8000/assets</code>.</p>
 <pre class="markdown"><code># Home
 
-- Download a [fact about the web](/assets/fact.txt) in text format.
-- Read the [LICENSE](/LICENSE).</code></pre>
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).</code></pre>
 <h2 id="stylesheets">Stylesheets</h2>
 <p>Add a stylesheet to the assets folder, like
 <code>assets/style.css</code>.</p>
@@ -221,22 +221,22 @@ the <code>/assets</code> route, available at
 <code>style</code> can include any URL that responds with a valid
 stylesheet.</p>
 <pre class="yaml"><code>---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 ---</code></pre>
 <h2 id="scripts">Scripts</h2>
 <p>Add a script to the assets folder, like
@@ -246,24 +246,24 @@ style:
 <code>script</code> can include any URL that responds with a valid
 script.</p>
 <pre class="yaml"><code>---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 script:
-  - /assets/script.js
+  - assets/script.js
 ---</code></pre>
 <h2 id="modules">Modules</h2>
 <p>Add a module to the assets folder, like
@@ -286,33 +286,33 @@ render(html`&lt;${Counter} /&gt;`, document.getElementById(&quot;counter&quot;))
 <code>module</code> can include any URL that responds with a valid
 module.</p>
 <pre class="yaml"><code>---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 script:
-  - /assets/script.js
+  - assets/script.js
 module:
-  - /assets/Counter.js
+  - assets/Counter.js
 ---</code></pre>
 <p>To use the new module add an HTML element with
 <code>id="counter"</code> to a document like <code>index.md</code>.</p>
 <pre class="markdown"><code># Home
 
-- Download a [fact about the web](/assets/fact.txt) in text format.
-- Read the [LICENSE](/LICENSE).
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).
 
 &lt;p id=&quot;counter&quot;&gt;&lt;/p&gt;</code></pre>
 <h2 id="templates">Templates</h2>
@@ -328,6 +328,9 @@ all pages, but a template for a page will override it.</p>
 
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot;&gt;
+$if(base)$
+  &lt;base href=&quot;$base$$file$&quot;&gt;
+$endif$
   &lt;title&gt;$title$&lt;/title&gt;
 $if(author)$$
 for(author)$
@@ -364,7 +367,7 @@ $endif$
 
 &lt;body&gt;
   &lt;header&gt;
-    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;$title$&lt;/a&gt;$if(description)$&lt;br&gt;&lt;small&gt;$description$&lt;/small&gt;$endif$&lt;/h1&gt;
+    &lt;h1&gt;&lt;a href=&quot;index.html&quot;&gt;$title$&lt;/a&gt;$if(description)$&lt;br&gt;&lt;small&gt;$description$&lt;/small&gt;$endif$&lt;/h1&gt;
 $if(nav)$
     &lt;nav&gt;$for(nav)$&lt;a href=&quot;$nav.href$&quot;&gt;$nav.label$&lt;/a&gt;$sep$ / $endfor$&lt;/nav&gt;
 $endif$
@@ -376,7 +379,7 @@ $if(counter)$&lt;p id=&quot;counter&quot;&gt;&lt;/p&gt;$endif$
   &lt;/main&gt;
 
   &lt;footer&gt;
-    &lt;p&gt;&lt;a href=&quot;/&quot;&gt;$title$&lt;/a&gt;$if(description)$&lt;br&gt;&lt;small&gt;$description$&lt;/small&gt;$endif$&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;index.html&quot;&gt;$title$&lt;/a&gt;$if(description)$&lt;br&gt;&lt;small&gt;$description$&lt;/small&gt;$endif$&lt;/p&gt;
 $if(nav)$
     &lt;nav&gt;$for(nav)$&lt;a href=&quot;$nav.href$&quot;&gt;$nav.label$&lt;/a&gt;$sep$ / $endfor$&lt;/nav&gt;
 $endif$
@@ -399,33 +402,33 @@ $endif$
 <code>metadata/default.yaml</code> to show the counter of the
 template.</p>
 <pre class="yaml"><code>---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 script:
-  - /assets/script.js
+  - assets/script.js
 module:
-  - /assets/Counter.js
+  - assets/Counter.js
 counter: yes
 ---</code></pre>
 <p>And remove the counter element from <code>index.md</code>.</p>
 <pre class="markdown"><code># Home
 
-- Download a [fact about the web](/assets/fact.txt) in text format.
-- Read the [LICENSE](/LICENSE).</code></pre>
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).</code></pre>
 <h2 id="theme">Theme</h2>
 <p>The <code>theme</code> folder contains assets, metadata and templates
 used when the project does not provide them. In that case, it will get
@@ -450,29 +453,29 @@ author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
 theme:
   style:
-    - /theme/style.css
+    - theme/style.css
   module:
-    - /theme/Counter.js
+    - theme/Counter.js
 counter: yes
 ---</code></pre>
 <p>And leave only the metadata for the current project in
 <code>metadata/default.yaml</code>.</p>
 <pre class="yaml"><code>---
-rss: /rss.xml
+rss: rss.xml
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 script:
-  - /assets/script.js
+  - assets/script.js
 ---</code></pre>
 <h2 id="tests">Tests</h2>
 <p>The <code>test</code> folder contains Spock test cases named
@@ -525,8 +528,32 @@ class WebPagesSpec extends Specification {
 Pages</a>, or <a href="https://pages.github.com/">GitHub Pages</a>. For
 self-hosting use the <code>docs</code> folder as the public directory of
 the HTTP server.</p>
+<p>The base URL can be set in metadata files like
+<code>metadata/default.yaml</code> with <code>base</code>. Remember to
+update <code>metadata/rss.yaml</code> and
+<code>metadata/sitemap.yaml</code> accordingly.</p>
+<pre class="yaml"><code>---
+base: https://janedev.github.io/my-website/
+rss: rss.xml
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+script:
+  - assets/script.js
+---</code></pre>
+<p>The <code>.rewrite</code> file can be used to change the name of the
+generated HTML. Each line should contain a key-value pair separated by
+<code>:</code>. A good example is using the <code>README</code> document
+as the index page.</p>
+<pre><code>README:index</code></pre>
 <h2 id="next-steps">Next steps</h2>
-<p>The <a href="/elements.html">Elements page</a> lists everything the
+<p>The <a href="elements.html">Elements page</a> lists everything the
 Markdown documents can show.</p>
     </section>
   </main>
@@ -536,8 +563,8 @@ Markdown documents can show.</p>
       <hr>
       <p><b><a href="index.html">markdown-pages</a></b> - Static Site
 Generator for Markdown</p>
-      <nav><p><a href="/index.html">Home</a> / <a href="/tutorial.html">Tutorial</a> / <a href="/elements.html">Elements</a> / <a href="/README.html">Readme</a> / <a href="/CHANGELOG.html">Change
-Log</a> / <a href="https://github.com/marcbperez/markdown-pages">Sources</a> / <a href="/rss.xml">RSS</a> / <a href="/sitemap.xml">Sitemap</a></p></nav>
+      <nav><p><span><a href="index.html">Home</a> /</span> <span><a href="tutorial.html">Tutorial</a> /</span> <span><a href="elements.html">Elements</a> /</span> <span><a href="README.html">Readme</a> /</span> <span><a href="CHANGELOG.html">Change
+Log</a> /</span> <span><a href="https://github.com/marcbperez/markdown-pages">Sources</a> /</span> <span><a href="rss.xml">RSS</a></p></nav>
       <p class="themeform"></p>
       <div id="codehighlighter"></div>
     </div>

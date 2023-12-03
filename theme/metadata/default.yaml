@@ -4,8 +4,10 @@
 # with a CSS, JavaScript module or JavaScript script, respectively. Commented
 # out parameters are kept as references for the template.
 
-# rss: /rss.xml
-favicon: /theme/favicon.ico
+# base: https://my-site.net/
+class: detect light medium serif
+# rss: rss.xml
+favicon: theme/favicon.ico
 lang: en
 dir: ltr
 title: New website
@@ -17,21 +19,21 @@ description: A new website in cyberspace
 toc: false
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
 # style:
-#   - /assets/style.css
+#   - assets/style.css
 # module:
-#   - /assets/Module.js
+#   - assets/Module.js
 # script:
-#   - /assets/script.js
+#   - assets/script.js
 theme:
   style:
-    - /theme/style.css
-    - /theme/ThemeForm.css
-    - /theme/CodeHighlighter.css
+    - theme/style.css
+    - theme/ThemeForm.css
+    - theme/CodeHighlighter.css
   module:
-    - /theme/ThemeForm.js
-    - /theme/CodeHighlighter.js
+    - theme/ThemeForm.js
+    - theme/CodeHighlighter.js
     - https://esm.sh/prismjs/components/prism-bash.min.js
     - https://esm.sh/prismjs/components/prism-python.min.js
     - https://esm.sh/prismjs/components/prism-markdown.min.js
@@ -39,6 +41,6 @@ theme:
     - https://esm.sh/prismjs/plugins/toolbar/prism-toolbar.min.js
     - https://esm.sh/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js
   # script:
-  #   - /theme/script.js
+  #   - theme/script.js
 ---
 

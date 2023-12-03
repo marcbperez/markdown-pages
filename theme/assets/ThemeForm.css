@@ -2,8 +2,9 @@
 
 .themeform>form {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  padding-bottom: var(--spacing-small);
+  overflow-y: auto;
   gap: var(--spacing-small) var(--spacing-medium);
 }
 

@@ -5,6 +5,17 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+### Added
+
+  - File and link rewrites.
+  - Deployment workflow.
+
+### Changed
+
+  - Installation script.
+  - Base URL, links and paths.
+  - Body class, navigation and CSS image selectors.
+
 ## 0.10.0 - 2023-12-2
 
 ### Added

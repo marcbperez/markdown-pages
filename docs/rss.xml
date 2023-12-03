@@ -3,17 +3,17 @@
 <channel>
 
 <title>markdown-pages</title>
-<link>https://marcbperez.github.io/markdown-pages</link>
+<link>https://marcbperez.github.io/markdown-pages/</link>
 <description>Static Site Generator for Markdown</description>
 
 <item>
   <title>Home</title>
-  <link>https://marcbperez.github.io/markdown-pages/</link>
+  <link>https://marcbperez.github.io/markdown-pages/index.html</link>
   <description>The Home page, with instructions on how to install and
 get started with markdown-pages, is now available online.</description>
-  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/</guid>
+  <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/index.html</guid>
   <author>Marc B. Perez</author>
-  <pubDate>2 Dec 2023</pubDate>
+  <pubDate>3 Dec 2023</pubDate>
 </item>
 <item>
   <title>Tutorial</title>
@@ -22,7 +22,7 @@ get started with markdown-pages, is now available online.</description>
 markdown-pages, is now available online.</description>
   <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/tutorial.html</guid>
   <author>Marc B. Perez</author>
-  <pubDate>2 Dec 2023</pubDate>
+  <pubDate>3 Dec 2023</pubDate>
 </item>
 <item>
   <title>Elements</title>
