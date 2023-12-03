@@ -68,9 +68,9 @@ author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
 ---
 ```
 
@@ -91,9 +91,9 @@ generated from `metadata/sitemap.yaml`. The required parameters are `base` and
 
 ```yaml
 ---
-base: https://www.my-website.net
+base: https://www.my-website.net/
 url:
-  - loc: /
+  - loc:
     lastmod: 2024-01-01
     changefreq: monthly
     priority: 0.5
@@ -110,11 +110,11 @@ author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 ---
 ```
 
@@ -130,10 +130,10 @@ required. `item.link`, `image.url` and `enclosure.url` are relative to
 ---
 channel:
   title: My website
-  link: https://www.my-website.net
+  link: https://www.my-website.net/
   description: My website in cyberspace
 item:
-  - link: /
+  - link:
     title: Home
     description: My website's homepage.
 ---
@@ -145,20 +145,20 @@ Set the `rss` parameter and add a link to the RSS feed in the navigation list of
 
 ```yaml
 ---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 ---
 ```
 
@@ -174,14 +174,14 @@ echo "This project is open source." > LICENSE
 echo LICENSE >> .include
 ```
 
-In page documents like `index.md` files are accessed via the `/assets` route,
+In page documents like `index.md` files are accessed via the `assets` route,
 available at `http://localhost:8000/assets`. 
 
 ```markdown
 # Home
 
-- Download a [fact about the web](/assets/fact.txt) in text format.
-- Read the [LICENSE](/LICENSE).
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).
 ```
 
 ## Stylesheets
@@ -199,22 +199,22 @@ URL that responds with a valid stylesheet.
 
 ```yaml
 ---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 ---
 ```
 
@@ -231,24 +231,24 @@ URL that responds with a valid script.
 
 ```yaml
 ---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 script:
-  - /assets/script.js
+  - assets/script.js
 ---
 ```
 
@@ -278,26 +278,26 @@ URL that responds with a valid module.
 
 ```yaml
 ---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 script:
-  - /assets/script.js
+  - assets/script.js
 module:
-  - /assets/Counter.js
+  - assets/Counter.js
 ---
 ```
 
@@ -307,8 +307,8 @@ To use the new module add an HTML element with `id="counter"` to a document like
 ```markdown
 # Home
 
-- Download a [fact about the web](/assets/fact.txt) in text format.
-- Read the [LICENSE](/LICENSE).
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).
 
 <p id="counter"></p>
 ```
@@ -368,7 +368,7 @@ $endif$
 
 <body>
   <header>
-    <h1><a href="/">$title$</a>$if(description)$<br><small>$description$</small>$endif$</h1>
+    <h1><a href="index.html">$title$</a>$if(description)$<br><small>$description$</small>$endif$</h1>
 $if(nav)$
     <nav>$for(nav)$<a href="$nav.href$">$nav.label$</a>$sep$ / $endfor$</nav>
 $endif$
@@ -380,7 +380,7 @@ $if(counter)$<p id="counter"></p>$endif$
   </main>
 
   <footer>
-    <p><a href="/">$title$</a>$if(description)$<br><small>$description$</small>$endif$</p>
+    <p><a href="index.html">$title$</a>$if(description)$<br><small>$description$</small>$endif$</p>
 $if(nav)$
     <nav>$for(nav)$<a href="$nav.href$">$nav.label$</a>$sep$ / $endfor$</nav>
 $endif$
@@ -406,26 +406,26 @@ the counter of the template.
 
 ```yaml
 ---
-rss: /rss.xml
+rss: rss.xml
 title: My website
 description: My website in cyberspace
 author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 style:
-  - /assets/style.css
+  - assets/style.css
 script:
-  - /assets/script.js
+  - assets/script.js
 module:
-  - /assets/Counter.js
+  - assets/Counter.js
 counter: yes
 ---
 ```
@@ -435,8 +435,8 @@ And remove the counter element from `index.md`.
 ```markdown
 # Home
 
-- Download a [fact about the web](/assets/fact.txt) in text format.
-- Read the [LICENSE](/LICENSE).
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).
 ```
 
 ## Theme
@@ -473,12 +473,12 @@ author:
   - Jane Dev
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
 theme:
   style:
-    - /theme/style.css
+    - theme/style.css
   module:
-    - /theme/Counter.js
+    - theme/Counter.js
 counter: yes
 ---
 ```
@@ -487,18 +487,18 @@ And leave only the metadata for the current project in `metadata/default.yaml`.
 
 ```yaml
 ---
-rss: /rss.xml
+rss: rss.xml
 nav:
   - label: Home
-    href: /index.html
+    href: index.html
   - label: About
-    href: /about.html
+    href: about.html
   - label: RSS
-    href: /rss.xml
+    href: rss.xml
   - label: Sitemap
-    href: /sitemap.xml
+    href: sitemap.xml
 script:
-  - /assets/script.js
+  - assets/script.js
 ---
 ```
 
@@ -565,7 +565,7 @@ public directory of the HTTP server.
 
 The [Elements page][elements] lists everything the Markdown documents can show.
 
-[get-markdown-pages]: /index.html#get-markdown-pages
+[get-markdown-pages]: index.md#get-markdown-pages
 [dev-server-home]: http://localhost:8000
 [dev-server-about]: http://localhost:8000/about.html
 [dev-server-sitemap]: http://localhost:8000/sitemap.xml
@@ -573,4 +573,4 @@ The [Elements page][elements] lists everything the Markdown documents can show.
 [neocities]: https://neocities.org/
 [gitlab-pages]: https://docs.gitlab.com/ee/user/project/pages/
 [github-pages]: https://pages.github.com/
-[elements]: /elements.html
+[elements]: elements.md

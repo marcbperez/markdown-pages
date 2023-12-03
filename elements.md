@@ -260,5 +260,5 @@ Text with <small>smaller</small> text inside.
 
 [^1]: This is the footnote itself.
 
-[tutorial]: /tutorial.html
+[tutorial]: tutorial.md
 [prism-js]: https://prismjs.com/
