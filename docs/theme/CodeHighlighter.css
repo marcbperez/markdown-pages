@@ -13,3 +13,8 @@
 .code-toolbar>.toolbar button {
   cursor: pointer;
 }
+
+.code-toolbar code {
+  padding-right: 2.5em;
+  display: inline-block;
+}

@@ -82,10 +82,13 @@ class LinkVisitor extends AbstractVisitor {
 
     // Markdown files that will be converted to HTML.
     List<String> files
+    // Maps a file name with its alias, both without extension.
+    Map<String, String> rewrites
 
-    LinkVisitor(List<File> files) {
+    LinkVisitor(List<File> files, Map<String, String> rewrites) {
         this.files = []
         files.each { file -> this.files << file.name }
+        this.rewrites = rewrites
     }
 
     @Override
@@ -98,8 +101,9 @@ class LinkVisitor extends AbstractVisitor {
             .replaceFirst(~/#.*$/, '') // Remove the ID at the end.
 
         if (name in files) {
-            name = name.replaceFirst(~/\.md$/, '.html')
-            link.destination = "${prefix}${name}${suffix}"
+            name = name.replaceFirst(~/\..*$/, '') // Remove the extension.
+            name = rewrites.containsKey(name) ? rewrites[name] : name
+            link.destination = "${prefix}${name}.html${suffix}"
         }
     }
 
@@ -117,7 +121,12 @@ MarkdownRenderer renderer = MarkdownRenderer.builder()
 
 configure(project.rootProject) {
     ext {
-        prepare = { String inputPath, String outputPath, List<File> files ->
+        prepare = {
+            String inputPath,
+            String outputPath,
+            List<File> files,
+            Map<String, String> rewrites ->
+
             String text = new File(inputPath).getText('UTF-8')
             List<String> layout = splitFromHeader(text)
             String header = layout[0]
@@ -125,7 +134,7 @@ configure(project.rootProject) {
 
             Node document = parser.parse(content)
             // Check for links that need to be changed, and update them.
-            LinkVisitor linkVisitor = new LinkVisitor(files)
+            LinkVisitor linkVisitor = new LinkVisitor(files, rewrites)
             document.accept(linkVisitor)
             // Find math content that needs to be unescaped after rendering.
             tagEscapedMath(document, startUnescape, endUnescape)

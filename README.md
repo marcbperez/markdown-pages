@@ -89,9 +89,9 @@ This project is licensed under the [Apache License Version 2.0][license].
 
 [author]: https://marcbperez.github.io
 [issue-tracker]: https://github.com/marcbperez/markdown-pages/issues
-[editorconfig]: /.editorconfig
-[changelog]: /CHANGELOG.md
-[license]: /LICENSE
+[editorconfig]: .editorconfig
+[changelog]: CHANGELOG.md
+[license]: LICENSE
 [semver]: http://semver.org
 [install-gradle]: https://gradle.org/install
 [install-java]: https://wiki.debian.org/Java#Quick_Install_Guide

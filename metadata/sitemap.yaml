@@ -2,25 +2,25 @@
 # Sitemap metadata, configures the output of the sitemap.
 # `base` and `url.loc` are required. `url.loc` is relative to `base`.
 
-base: https://marcbperez.github.io/markdown-pages
+base: https://marcbperez.github.io/markdown-pages/
 url:
-  - loc: /
+  - loc: index.html
+    lastmod: 2023-12-3
+    changefreq: monthly
+    priority: 0.5
+  - loc: tutorial.html
+    lastmod: 2023-12-3
+    changefreq: monthly
+    priority: 0.5
+  - loc: elements.html
     lastmod: 2023-12-2
     changefreq: monthly
     priority: 0.5
-  - loc: /tutorial.html
+  - loc: README.html
     lastmod: 2023-12-2
     changefreq: monthly
     priority: 0.5
-  - loc: /elements.html
-    lastmod: 2023-12-2
-    changefreq: monthly
-    priority: 0.5
-  - loc: /README.html
-    lastmod: 2023-12-2
-    changefreq: monthly
-    priority: 0.5
-  - loc: /CHANGELOG.html
+  - loc: CHANGELOG.html
     lastmod: 2023-12-2
     changefreq: monthly
     priority: 0.5
