@@ -138,7 +138,7 @@ markdownFiles.each { File mdFile ->
     // The generated HTML output file.
     String htmlFile = "${buildDir}/${fileName}.html"
     // The pre-build file.
-    String tempMd = "${tempDir}/${mdFile.name}"
+    String tempMarkdown = "${tempDir}/${mdFile.name}"
 
     // A custom template in my project.
     String userPageTemplate = "${srcDir}/template/${fileName}.html"
@@ -197,15 +197,15 @@ markdownFiles.each { File mdFile ->
     task "prepare${camelCase}" {
         description "Prepares ${mdFile.name} in a temporary file."
         // See `helper.gradle`.
-        doLast { prepare("${mdFile}", tempMd, markdownFiles) }
+        doLast { prepare("${mdFile}", tempMarkdown, markdownFiles) }
 
         new ByteArrayOutputStream()
     }
 
     // Arguments for the Pandoc build.
-    List<String> arguments = ['-s', '-o', htmlFile, tempMd, '-t', 'html5',
-        '--template', templateFile, '--no-highlight', '--toc', '--mathml'] +
-        metadata
+    List<String> arguments = ['-s', '-o', htmlFile, tempMarkdown, '-t', 'html5',
+        '--template', templateFile, '--no-highlight', '--toc', '--mathml',
+        '--metadata', "file:${fileName}.html"] + metadata
 
     // Convert the temporary Markdown to HTML using Pandoc.
     task "build${camelCase}"(type: Exec, dependsOn: "prepare${camelCase}") {
