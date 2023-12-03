@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="utf-8">
+$if(base)$
+  <base href="$base$$file$">
+$endif$
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <title>$title$</title>
@@ -45,13 +48,13 @@ $endfor$
 $endif$
 </head>
 
-<body class="detect light medium serif">
+<body$if(class)$ class="$class$"$endif$>
   <header>
     <div>
       <p class="themeform"></p>
       <h1><a href="index.html">$title$</a>$if(description)$<br><small>$description$</small>$endif$</h1>
 $if(nav)$
-      <nav><p>$for(nav)$<a href="$nav.href$">$nav.label$</a>$sep$ / $endfor$</p></nav>
+      <nav><p>$for(nav)$<span><a href="$nav.href$">$nav.label$</a>$sep$ /</span> $endfor$</p></nav>
 $endif$
       <hr>
     </div>
@@ -76,7 +79,7 @@ $body$
       <hr>
       <p><b><a href="index.html">$title$</a></b>$if(description)$ - $description$$endif$</p>
 $if(nav)$
-      <nav><p>$for(nav)$<a href="$nav.href$">$nav.label$</a>$sep$ / $endfor$</p></nav>
+      <nav><p>$for(nav)$<span><a href="$nav.href$">$nav.label$</a>$sep$ /</span> $endfor$</p></nav>
 $endif$
       <p class="themeform"></p>
       <div id="codehighlighter"></div>
