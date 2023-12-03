@@ -5,7 +5,7 @@
 # directory.
 
 # The project directory is always the parent directory of this script.
-PROJECT_DIR=$(realpath $(dirname $0)/..)
+PROJECT_DIR=$(realpath $(dirname $(realpath $0))/..)
 
 # The working directory is the path from where this script was called.
 WORKING_DIR=$(realpath $(pwd))
