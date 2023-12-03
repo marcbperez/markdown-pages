@@ -5,6 +5,8 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+## 0.11.0 - 2023-12-3
+
 ### Added
 
   - File and link rewrites.
