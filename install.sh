@@ -7,9 +7,11 @@
 # `install.sh .` uses the current directory.
 
 # The version to download.
-VER="0.1.0"
+VER="0.10.2"
 # The installation folder.
-DIR="${$1:-~/.local/bin}/markdown-pages"
+DIR="${1:-"$HOME/.local/bin"}/markdown-pages"
+# The folder where the downloaded version will be extracted.
+EXTRACTED="$DIR/markdown-pages-$VER"
 
 # Create the installation folder.
 mkdir -p $DIR
@@ -20,19 +22,19 @@ curl -L \
   | tar zxvp -C $DIR
 
 # Set execution permissions, in case they were not applied during decompression.
-chmod +x \
-  $DIR/markdown-pages-$VER/gradlew \
-  $DIR/markdown-pages-$VER/bin/markdown-pages
+chmod +x $EXTRACTED/gradlew $EXTRACTED/bin/markdown-pages
 
 # Install system dependencies.
 echo "sudo is needed to install system dependencies."
-sudo $DIR/markdown-pages-$VER/gradlew install
+sudo $EXTRACTED/gradlew --project-dir=$EXTRACTED install
+
+# Restore user and group after sudo commands.
+sudo chown -R $USER:$USER $EXTRACTED
 
 # Try to add permanently to the path.
-if [ -f ~/.bashrc ]; then
-  echo "export PATH=$DIR/markdown-pages-$VER/bin:\$PATH" \
-    >> ~/.bashrc
+if [ -f $HOME/.bashrc ]; then
+  echo "export PATH=$EXTRACTED/bin:\$PATH" >> $HOME/.bashrc
 else
   echo "Could not add to path, but it can be done manually with:"
-  echo "export PATH=$DIR/markdown-pages-$VER/bin:\$PATH" \
+  echo "export PATH=$EXTRACTED/bin:\$PATH"
 fi

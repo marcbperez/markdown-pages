@@ -2,16 +2,16 @@
 toc: false
 ---
 
-# Hello, web!
+![](assets/pipeline.svg "Pipeline (full width centered)")
 
 Markdown-pages is a Static Site Generator for Markdown powered by Gradle,
 Pandoc, Spock, Preact and a minimalistic template. **For Debian with Java 18 or
 newer.**
 
-## Get markdown-pages
+# Get markdown-pages
 
 ```bash
-curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.10.1/install.sh | sh
+curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.10.2/install.sh | sh
 ```
 
 Installs the latest version in `~/.local/bin`. To change the default folder set
