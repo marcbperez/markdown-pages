@@ -1,9 +1,6 @@
 /* groovylint-disable DuplicateNumberLiteral, DuplicateStringLiteral, JavaIoPackageAccess */
 
 /* groovylint-disable-next-line CompileStatic */
-apply from: 'helper.gradle'
-
-/* groovylint-disable-next-line CompileStatic */
 defaultTasks 'wrapper', 'watch', 'clean', 'build', 'test'
 
 // APT dependencies needed for this pipeline.
@@ -146,13 +143,15 @@ markdownFiles.each { File mdFile ->
     String fileName = mdFile.name.split('\\.')[0]
     // Used to give the build task a name.
     String camelCase = fileName.split('-')*.capitalize().join()
-    // The pre-build file.
-    String tempMarkdown = "${tempDir}/${mdFile.name}"
     // The name of the generated HTML file, without the extension.
     String htmlName = rewrites.containsKey(fileName)
         ? rewrites[fileName] : fileName
     // The full path of the generated HTML output file.
     String htmlFile = "${buildDir}/${htmlName}.html"
+    // The full path of the HTML chunk file.
+    String chunkFile = "${tempDir}/${htmlName}.html"
+    // The full path of the chunk template.
+    String chunkTemplate = "${projectThemeDir}/template/chunk.html"
 
     // A custom template in my project.
     String userPageTemplate = "${srcDir}/template/${fileName}.html"
@@ -206,27 +205,37 @@ markdownFiles.each { File mdFile ->
         metadata = metadata + ['--metadata-file', userPageMeta]
     }
 
-    // Changes the existing Markdown and puts it in a temporary file. Pandoc
-    // will generate the final HTML from this file.
-    task "prepare${camelCase}" {
-        description "Prepares ${mdFile.name} in a temporary file."
-        // See `helper.gradle`.
-        doLast { prepare("${mdFile}", tempMarkdown, markdownFiles, rewrites) }
+    // Arguments for the HTML page build
+    List<String> buildArguments = [
+        '-s', '-o', htmlFile, "${mdFile}", '-t', 'html5',
+        '--lua-filter', "${projectDir}/filters/links.lua",
+        '--template', templateFile, '--no-highlight', '--toc', '--mathml',
+        '--metadata', "file:${htmlName}.html"] + metadata
+
+    // Convert a Markdown document to an HTML page using Pandoc.
+    task "build${camelCase}"(type: Exec) {
+        description "Builds ${mdFile.name} into an HTML page."
+        workingDir path
+        commandLine 'pandoc'
+        args buildArguments
 
         new ByteArrayOutputStream()
     }
 
-    // Arguments for the Pandoc build.
-    List<String> arguments = ['-s', '-o', htmlFile, tempMarkdown, '-t', 'html5',
-        '--template', templateFile, '--no-highlight', '--toc', '--mathml',
+    // Arguments for the HTML chunk build.
+    List<String> chunkArguments = [
+        '-s', '-o', chunkFile, "${mdFile}", '-t', 'html5',
+        '--lua-filter', "${projectDir}/filters/links.lua",
+        '--lua-filter', "${projectDir}/filters/chunk.lua",
+        '--template', chunkTemplate, '--no-highlight', '--toc', '--mathml',
         '--metadata', "file:${htmlName}.html"] + metadata
 
-    // Convert the temporary Markdown to HTML using Pandoc.
-    task "build${camelCase}"(type: Exec, dependsOn: "prepare${camelCase}") {
-        description "Builds ${mdFile.name} into an HTML page."
+    // Convert a Markdown document to an HTML chunk using Pandoc.
+    task "chunk${camelCase}"(type: Exec) {
+        description "Builds ${mdFile.name} into an HTML chunk."
         workingDir path
         commandLine 'pandoc'
-        args arguments
+        args chunkArguments
 
         new ByteArrayOutputStream()
     }
@@ -291,8 +300,13 @@ fileTree(dir: srcDir, include: 'metadata/rss.yaml').each { File yamlFile ->
         workingDir path
         commandLine 'pandoc'
         args '-s', '-o', xmlFile, '/dev/null', '-t', 'html5', '-f', 'html',
-            '--metadata-file', metadata, '--metadata', 'title="rss"',
-            '--template', templateFile, '--no-highlight'
+            '--lua-filter', "${projectDir}/filters/content.lua",
+            '--template', templateFile, '--no-highlight',
+            '--metadata-file', metadata, '--metadata', 'title="rss"'
+
+        dependsOn {
+            tasks.findAll { task -> task.name.startsWith('chunk') }
+        }
 
         new ByteArrayOutputStream()
     }
