@@ -4,7 +4,7 @@
 
 base: https://marcbperez.github.io/markdown-pages/
 url:
-  - loc:
+  - loc: index.html
     lastmod: 2023-12-2
     changefreq: monthly
     priority: 0.5
