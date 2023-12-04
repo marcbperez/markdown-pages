@@ -168,6 +168,9 @@ is generated from <code>metadata/rss.yaml</code>. <code>channel</code>,
 <code>item.link</code>, <code>image.url</code> and
 <code>enclosure.url</code> are relative to <code>channel.link</code>.
 <code>item.enclosure.length</code> is in bytes.</p>
+<p>Put a value like <code>'{{index.html}}'</code> in
+<code>item.description</code> to import the contents of that file, or
+use a normal string for a description in plain text.</p>
 <pre class="yaml"><code>---
 channel:
   title: My website
@@ -176,7 +179,7 @@ channel:
 item:
   - link: index.html
     title: Home
-    description: My website&#39;s homepage.
+    description: &#39;{{index.html}}&#39;
 ---</code></pre>
 <p>Set the <code>rss</code> parameter and add a link to the RSS feed in
 the navigation list of <code>metadata/default.yaml</code>.</p>
