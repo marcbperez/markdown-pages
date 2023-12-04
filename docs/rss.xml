@@ -17,7 +17,7 @@ title="Pipeline (full width centered)" /></p>
 Gradle, Pandoc, Spock, Preact and a minimalistic template. <strong>For
 Debian with Java 18 or newer.</strong></p>
 <h1 id="get-markdown-pages">Get markdown-pages</h1>
-<pre class="bash"><code>curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.11.0/install.sh | sh</code></pre>
+<pre class="bash"><code>curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.12.0/install.sh | sh</code></pre>
 <p>Installs the latest version in <code>~/.local/bin</code>. To change
 the default folder set the first parameter. For example,
 <code>.../install.sh | sh -s -- .</code> uses the current directory.</p>
@@ -875,12 +875,13 @@ License Version 2.0</a>.</p> ]]></description>
 This project adheres to <a href="http://semver.org">Semantic
 Versioning</a>.</p>
 <h2 id="unreleased">Unreleased</h2>
+<h2 id="section">0.12.0 - 2023-12-4</h2>
 <h3 id="added">Added</h3>
 <ul>
 <li>Page contents in RSS item description.</li>
 <li>Lua filters to replace Groovy helper.</li>
 </ul>
-<h2 id="section">0.11.0 - 2023-12-3</h2>
+<h2 id="section-1">0.11.0 - 2023-12-3</h2>
 <h3 id="added-1">Added</h3>
 <ul>
 <li>File and link rewrites.</li>
@@ -892,7 +893,7 @@ Versioning</a>.</p>
 <li>Base URL, links and paths.</li>
 <li>Body class, navigation and CSS image selectors.</li>
 </ul>
-<h2 id="section-1">0.10.0 - 2023-12-2</h2>
+<h2 id="section-2">0.10.0 - 2023-12-2</h2>
 <h3 id="added-2">Added</h3>
 <ul>
 <li>Site build for this project.</li>
@@ -908,13 +909,13 @@ Versioning</a>.</p>
 <ul>
 <li>All the files from the previous version.</li>
 </ul>
-<h2 id="section-2">0.9.1 - 2017-11-25</h2>
+<h2 id="section-3">0.9.1 - 2017-11-25</h2>
 <h3 id="fixed">Fixed</h3>
 <ul>
 <li>Unnecessary JavaScript dependencies and template issues.</li>
 <li>Project author’s name.</li>
 </ul>
-<h2 id="section-3">0.9.0 - 2017-09-14</h2>
+<h2 id="section-4">0.9.0 - 2017-09-14</h2>
 <h3 id="added-3">Added</h3>
 <ul>
 <li>Dynamic template and metadata in build script.</li>
@@ -923,27 +924,27 @@ Versioning</a>.</p>
 <li>Style for dark HR elements.</li>
 <li>Gradle wrapper for this project.</li>
 </ul>
-<h2 id="section-4">0.8.3 - 2017-07-03</h2>
+<h2 id="section-5">0.8.3 - 2017-07-03</h2>
 <h3 id="fixed-1">Fixed</h3>
 <ul>
 <li>Missing Material Design Lite script.</li>
 <li>Darken and lighten template functionality.</li>
 <li>Template layout and style.</li>
 </ul>
-<h2 id="section-5">0.8.2 - 2017-06-29</h2>
+<h2 id="section-6">0.8.2 - 2017-06-29</h2>
 <h3 id="fixed-2">Fixed</h3>
 <ul>
 <li>Errata on README description and project usage.</li>
 <li>Scripts, style and template.</li>
 </ul>
-<h2 id="section-6">0.8.1 - 2017-05-12</h2>
+<h2 id="section-7">0.8.1 - 2017-05-12</h2>
 <h3 id="fixed-3">Fixed</h3>
 <ul>
 <li>Build script with background serve task.</li>
 <li>Build information and errata in README usage.</li>
 <li>Google Analytics tracking code in the main template.</li>
 </ul>
-<h2 id="section-7">0.8.0 - 2017-04-18</h2>
+<h2 id="section-8">0.8.0 - 2017-04-18</h2>
 <h3 id="changed-2">Changed</h3>
 <ul>
 <li>Build folder to docs.</li>
@@ -951,12 +952,12 @@ Versioning</a>.</p>
 <li>Gradle wrapper for this project.</li>
 <li>Project usage and instructions.</li>
 </ul>
-<h2 id="section-8">0.7.2 - 2017-03-25</h2>
+<h2 id="section-9">0.7.2 - 2017-03-25</h2>
 <h3 id="fixed-4">Fixed</h3>
 <ul>
 <li>Typographical errors in README usage.</li>
 </ul>
-<h2 id="section-9">0.7.1 - 2017-03-20</h2>
+<h2 id="section-10">0.7.1 - 2017-03-20</h2>
 <h3 id="changed-3">Changed</h3>
 <ul>
 <li>README file with new usage instructions.</li>
@@ -964,7 +965,7 @@ Versioning</a>.</p>
 <li>Gradle build script for this project.</li>
 <li>Test folder location inside the project.</li>
 </ul>
-<h2 id="section-10">0.7.0 - 2017-03-13</h2>
+<h2 id="section-11">0.7.0 - 2017-03-13</h2>
 <h3 id="added-4">Added</h3>
 <ul>
 <li>Gradle wrapper for this project.</li>
@@ -976,13 +977,13 @@ Versioning</a>.</p>
 <ul>
 <li>README file with new usage instructions.</li>
 </ul>
-<h2 id="section-11">0.6.1 - 2017-01-27</h2>
+<h2 id="section-12">0.6.1 - 2017-01-27</h2>
 <h3 id="added-5">Added</h3>
 <ul>
 <li>Necessary Dockerfile for hub integration.</li>
 <li>Dockerfile build directory on docker-compose script.</li>
 </ul>
-<h2 id="section-12">0.6.0 - 2017-01-27</h2>
+<h2 id="section-13">0.6.0 - 2017-01-27</h2>
 <h3 id="removed-1">Removed</h3>
 <ul>
 <li>Dockerfile in favour of external builder image.</li>
@@ -992,20 +993,20 @@ Versioning</a>.</p>
 <ul>
 <li>The docker-compose script uses an external builder image.</li>
 </ul>
-<h2 id="section-13">0.5.0 - 2017-01-13</h2>
+<h2 id="section-14">0.5.0 - 2017-01-13</h2>
 <h3 id="added-6">Added</h3>
 <ul>
 <li>Cases for the supporting files.</li>
 <li>Cases for the build environment.</li>
 <li>Cases for the default web pages.</li>
 </ul>
-<h2 id="section-14">0.4.0 - 2017-01-12</h2>
+<h2 id="section-15">0.4.0 - 2017-01-12</h2>
 <h3 id="changed-6">Changed</h3>
 <ul>
 <li>Layout style sheet to show an article.</li>
 <li>Main script to support code highlighting.</li>
 </ul>
-<h2 id="section-15">0.3.0 - 2017-01-11</h2>
+<h2 id="section-16">0.3.0 - 2017-01-11</h2>
 <h3 id="added-7">Added</h3>
 <ul>
 <li>Index page in Markdown format.</li>
@@ -1013,13 +1014,13 @@ Versioning</a>.</p>
 <li>Page assets and favicon.</li>
 <li>Main script and style sheet.</li>
 </ul>
-<h2 id="section-16">0.2.0 - 2017-01-10</h2>
+<h2 id="section-17">0.2.0 - 2017-01-10</h2>
 <h3 id="added-8">Added</h3>
 <ul>
 <li>Gradle build script for this project.</li>
 <li>Docker and docker-compose configuration for this project.</li>
 </ul>
-<h2 id="section-17">0.1.0 - 2017-01-09</h2>
+<h2 id="section-18">0.1.0 - 2017-01-09</h2>
 <h3 id="added-9">Added</h3>
 <ul>
 <li>A README which covers project description and usage.</li>
