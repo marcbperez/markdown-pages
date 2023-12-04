@@ -332,6 +332,9 @@ template for a page will override it.
 
 <head>
   <meta charset="utf-8">
+$if(base)$
+  <base href="$base$$file$">
+$endif$
   <title>$title$</title>
 $if(author)$$
 for(author)$
@@ -559,7 +562,29 @@ class WebPagesSpec extends Specification {
 
 Go live for free at [Neocities][neocities], [GitLab Pages][gitlab-pages], or
 [GitHub Pages][github-pages]. For self-hosting use the `docs` folder as the
-public directory of the HTTP server.
+public directory of the HTTP server. 
+
+The base URL can be set in metadata files like `metadata/default.yaml` with
+`base`. Remember to update `metadata/rss.yaml` and `metadata/sitemap.yaml`
+accordingly.
+
+```yaml
+---
+base: https://janedev.github.io/my-website/
+rss: rss.xml
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+script:
+  - assets/script.js
+---
+```
 
 ## Next steps
 
