@@ -91,10 +91,10 @@ Term name:
 ## Link
 
 ```markdown
-[Link](/elements.html) to this page.
+[Link](elements.html) to this page.
 ```
 
-[Link](/elements.html) to this page.
+[Link](elements.html) to this page.
 
 ## Image
 
