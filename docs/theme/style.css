@@ -226,25 +226,34 @@ table td {
 
 /* Images: */
 
-img[alt$="cover"] {
+img[title*="cover"] {
   width: 100%;
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
 
 /* Only inverted in light theme. */
-body.light img[alt*="light inverted"] {
+body.light img[title*="light inverted"] {
   filter: invert(1);
 }
 
 /* Only inverted in dark theme. */
-body.dark img[alt*="dark inverted"] {
+body.dark img[title*="dark inverted"] {
   filter: invert(1);
 }
 
 figure {
   margin-right: 0;
   margin-left: 0;
+}
+
+p:has(img[title*="centered"]),
+figure:has(img[title*="centered"]) {
+  text-align: center;
+}
+
+img[title*="full width"] {
+  max-width: 100%;
 }
 
 /* Forms: */
