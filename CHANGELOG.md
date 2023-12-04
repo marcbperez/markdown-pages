@@ -5,6 +5,17 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+## 0.10.2 - 2023-12-4
+
+## Fixed
+
+  - Install script and version number.
+  - Base URL usage in tutorial page.
+  - Site build for this version.
+  - Body class parameter.
+  - Links to the index page in the feed and sitemap.
+  - CSS selector for images and theme form overflow.
+
 ## 0.10.1 - 2023-12-3
 
 ### Fixed
