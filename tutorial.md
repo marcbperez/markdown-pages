@@ -126,6 +126,9 @@ from `metadata/rss.yaml`. `channel`, `channel.link`, `channel.title`,
 required. `item.link`, `image.url` and `enclosure.url` are relative to
 `channel.link`. `item.enclosure.length` is in bytes.
 
+Put a value like `'{{index.html}}'` in `item.description` to import the contents
+of that file, or use a normal string for a description in plain text.
+
 ```yaml
 ---
 channel:
@@ -135,13 +138,12 @@ channel:
 item:
   - link: index.html
     title: Home
-    description: My website's homepage.
+    description: '{{index.html}}'
 ---
 ```
 
 Set the `rss` parameter and add a link to the RSS feed in the navigation list of
 `metadata/default.yaml`.
-
 
 ```yaml
 ---

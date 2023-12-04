@@ -47,7 +47,7 @@ $for(item)$
 <item>
   <title>$item.title$</title>
   <link>$channel.link$$item.link$</link>
-  <description>$item.description$</description>
+  <description><![CDATA[ $item.description$ ]]></description>
   <guid isPermaLink="true">$channel.link$$item.link$</guid>
 $if(item.author)$
   <author>$item.author$</author>

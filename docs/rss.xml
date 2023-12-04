@@ -7,46 +7,1028 @@
 <description>Static Site Generator for Markdown</description>
 
 <item>
-  <title>Home</title>
+  <title>The Home page, with instructions on how to install and get
+started with markdown-pages, is now available online.</title>
   <link>https://marcbperez.github.io/markdown-pages/index.html</link>
-  <description>The Home page, with instructions on how to install and
-get started with markdown-pages, is now available online.</description>
+  <description><![CDATA[ <p><img
+src="https://marcbperez.github.io/markdown-pages/assets/pipeline.svg"
+title="Pipeline (full width centered)" /></p>
+<p>Markdown-pages is a Static Site Generator for Markdown powered by
+Gradle, Pandoc, Spock, Preact and a minimalistic template. <strong>For
+Debian with Java 18 or newer.</strong></p>
+<h1 id="get-markdown-pages">Get markdown-pages</h1>
+<pre class="bash"><code>curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.12.0/install.sh | sh</code></pre>
+<p>Installs the latest version in <code>~/.local/bin</code>. To change
+the default folder set the first parameter. For example,
+<code>.../install.sh | sh -s -- .</code> uses the current directory.</p>
+<h2 id="create-a-site">Create a site</h2>
+<p><code>markdown-pages</code> makes sites out of Markdown documents and
+shows them at <a
+href="http://localhost:8000">http://localhost:8000</a>.</p>
+<pre class="bash"><code>mkdir my-website
+cd my-website
+echo &quot;# Home&quot; &gt; index.md
+markdown-pages</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<p><a
+href="https://marcbperez.github.io/markdown-pages/tutorial.html">Continue
+to the tutorial</a> to learn how to create a site with custom assets,
+styles, scripts, templates and themes, and where to publish everything
+for free.</p>
+<p>For developers, the <a
+href="https://marcbperez.github.io/markdown-pages/README.html">Readme</a>
+provides instructions on how to download, install and extend
+markdown-pages, and the <a
+href="https://marcbperez.github.io/markdown-pages/CHANGELOG.html">Change
+Log</a> keeps track of its versions.</p> ]]></description>
   <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/index.html</guid>
   <author>Marc B. Perez</author>
   <pubDate>3 Dec 2023</pubDate>
 </item>
 <item>
-  <title>Tutorial</title>
+  <title>The Tutorial page, with a step-by-step guide to markdown-pages,
+is now available online.</title>
   <link>https://marcbperez.github.io/markdown-pages/tutorial.html</link>
-  <description>The Tutorial page, with a step-by-step guide to
-markdown-pages, is now available online.</description>
+  <description><![CDATA[ <h1 id="tutorial">Tutorial</h1>
+<p>Install markdown-pages with the <a
+href="https://marcbperez.github.io/markdown-pages/index.html#get-markdown-pages">installation
+command</a> first.</p>
+<h2 id="sites">Sites</h2>
+<p>In a new folder, add a bit of Markdown to <code>index.md</code> and
+run <code>markdown-pages</code>. <a
+href="http://localhost:8000">http://localhost:8000</a> will show the
+<code>docs/index.html</code> that results from converting
+<code>index.md</code>. The <code>docs</code> folder contains all the
+generated pages and assets of the site, it is the public directory. Any
+changes made to the sources will be reflected in <code>docs</code>
+automatically. Press <code>CTRL+C</code> to stop the site generator and
+the web server.</p>
+<pre class="bash"><code>mkdir my-website
+cd my-website
+echo &quot;# Home&quot; &gt; index.md
+markdown-pages</code></pre>
+<h2 id="pages">Pages</h2>
+<p>To create a new page add a Markdown or HTML file. Markdown files are
+converted to HTML with the help of a template. HTML files are copied to
+the <code>docs</code> folder directly. Files with extensions
+<code>.draft.md</code> or <code>.draft.html</code> will be excluded, and
+so will the files in each line of <code>.exclude</code>. Add content to
+<code>about.md</code> for <a
+href="http://localhost:8000/about.html">http://localhost:8000/about.html</a>
+to appear.</p>
+<pre class="bash"><code>echo &quot;# About&quot; &gt; about.md
+markdown-pages</code></pre>
+<h2 id="metadata">Metadata</h2>
+<p>Pages themselves can set their metadata in the header. Add the
+required title, description and author information to
+<code>about.md</code> to change the values shown at <a
+href="http://localhost:8000/about.html">http://localhost:8000/about.html</a>.</p>
+<pre class="markdown"><code>---
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+---
+
+# About</code></pre>
+<p>The <code>metadata</code> folder contains YAML files that set page
+metadata, but page headers will override them.</p>
+<pre class="bash"><code>mkdir metadata</code></pre>
+<p>Copy the header of <code>about.md</code> inside
+<code>metadata/about.yaml</code>, and add page links to
+<code>nav</code>. Since the YAML file contains the same values, the page
+header can be removed.</p>
+<pre class="yaml"><code>---
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+---</code></pre>
+<p>The <code>metadata/default.yaml</code> file is applied to all pages,
+but a metadata file for a page will override it. Move the contents of
+<code>metadata/about.yaml</code> to <code>metadata/default.yaml</code>,
+and <a href="http://localhost:8000">http://localhost:8000</a> will show
+the new values.</p>
+<pre class="bash"><code>mv metadata/about.yaml metadata/default.yaml</code></pre>
+<h2 id="sitemap">Sitemap</h2>
+<p>The sitemap at <a
+href="http://localhost:8000/sitemap.xml">https://localhost:8000/sitemap.xml</a>
+is generated from <code>metadata/sitemap.yaml</code>. The required
+parameters are <code>base</code> and <code>url.loc</code>.
+<code>url.loc</code> is relative to <code>base</code>.</p>
+<pre class="yaml"><code>---
+base: https://www.my-website.net/
+url:
+  - loc: index.html
+    lastmod: 2024-01-01
+    changefreq: monthly
+    priority: 0.5
+---</code></pre>
+<p>Add a link to the sitemap in the navigation list of
+<code>metadata/default.yaml</code>.</p>
+<pre class="yaml"><code>---
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: Sitemap
+    href: sitemap.xml
+---</code></pre>
+<h2 id="feed">Feed</h2>
+<p>The RSS feed at <a
+href="http://localhost:8000/rss.xml">https://localhost:8000/rss.xml</a>
+is generated from <code>metadata/rss.yaml</code>. <code>channel</code>,
+<code>channel.link</code>, <code>channel.title</code>,
+<code>channel.description</code>, <code>item.link</code>,
+<code>item.title</code> and <code>item.description</code> are required.
+<code>item.link</code>, <code>image.url</code> and
+<code>enclosure.url</code> are relative to <code>channel.link</code>.
+<code>item.enclosure.length</code> is in bytes.</p>
+<p>Put a value like <code>'{{index.html}}'</code> in
+<code>item.description</code> to import the contents of that file, or
+use a normal string for a description in plain text.</p>
+<pre class="yaml"><code>---
+channel:
+  title: My website
+  link: https://www.my-website.net/
+  description: My website in cyberspace
+item:
+  - link: index.html
+    title: Home
+    description: &#39;{{index.html}}&#39;
+---</code></pre>
+<p>Set the <code>rss</code> parameter and add a link to the RSS feed in
+the navigation list of <code>metadata/default.yaml</code>.</p>
+<pre class="yaml"><code>---
+rss: rss.xml
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+---</code></pre>
+<h2 id="assets">Assets</h2>
+<p>The <code>assets</code> folder can contain anything, it is copied
+entirely to <code>docs</code>. To copy any other file add it to a new
+line in <code>.include</code>.</p>
+<pre class="bash"><code>mkdir assets
+echo &quot;There are more than 1 billion websites in cyberspace.&quot; &gt; assets/fact.txt
+echo &quot;This project is open source.&quot; &gt; LICENSE
+echo LICENSE &gt;&gt; .include</code></pre>
+<p>In page documents like <code>index.md</code> files are accessed via
+the <code>assets</code> route, available at
+<code>http://localhost:8000/assets</code>.</p>
+<pre class="markdown"><code># Home
+
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).</code></pre>
+<h2 id="stylesheets">Stylesheets</h2>
+<p>Add a stylesheet to the assets folder, like
+<code>assets/style.css</code>.</p>
+<pre class="css"><code>main h1 {
+  font-size: 3em;
+}</code></pre>
+<p>Then add it to the metadata in <code>metadata/default.yaml</code>.
+<code>style</code> can include any URL that responds with a valid
+stylesheet.</p>
+<pre class="yaml"><code>---
+rss: rss.xml
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+style:
+  - assets/style.css
+---</code></pre>
+<h2 id="scripts">Scripts</h2>
+<p>Add a script to the assets folder, like
+<code>assets/script.js</code>.</p>
+<pre class="javascript"><code>alert(&quot;Hello, visitor!&quot;);</code></pre>
+<p>Then add it to the metadata in <code>metadata/default.yaml</code>.
+<code>script</code> can include any URL that responds with a valid
+script.</p>
+<pre class="yaml"><code>---
+rss: rss.xml
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+style:
+  - assets/style.css
+script:
+  - assets/script.js
+---</code></pre>
+<h2 id="modules">Modules</h2>
+<p>Add a module to the assets folder, like
+<code>assets/Counter.js</code>.</p>
+<pre class="javascript"><code>import htm from &quot;https://esm.sh/htm&quot;;
+import { h, render } from &quot;https://esm.sh/preact&quot;;
+import { useState } from &quot;https://esm.sh/preact/hooks&quot;;
+
+const html = htm.bind(h);
+
+export function Counter() {
+  const [value, setValue] = useState(0);
+  return html`&lt;button onClick=${() =&gt; setValue(value + 1)}&gt;
+    Clicked ${value} ${value === 1 ? &#39;time&#39; : &#39;times&#39;}
+  &lt;/button&gt;`;
+}
+
+render(html`&lt;${Counter} /&gt;`, document.getElementById(&quot;counter&quot;));</code></pre>
+<p>Then add it to the metadata in <code>metadata/default.yaml</code>.
+<code>module</code> can include any URL that responds with a valid
+module.</p>
+<pre class="yaml"><code>---
+rss: rss.xml
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+style:
+  - assets/style.css
+script:
+  - assets/script.js
+module:
+  - assets/Counter.js
+---</code></pre>
+<p>To use the new module add an HTML element with
+<code>id="counter"</code> to a document like <code>index.md</code>.</p>
+<pre class="markdown"><code># Home
+
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).
+
+&lt;p id=&quot;counter&quot;&gt;&lt;/p&gt;</code></pre>
+<h2 id="templates">Templates</h2>
+<p>The <code>template</code> folder contains HTML and XML files that use
+metadata to generate page layouts.</p>
+<pre class="bash"><code>mkdir template</code></pre>
+<p>Templates are applied to pages by name. The
+<code>template/index.html</code> template is applied to
+<code>index.md</code>. <code>template/default.html</code> is applied to
+all pages, but a template for a page will override it.</p>
+<pre class="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+$if(base)$
+  &lt;base href=&quot;$base$$file$&quot;&gt;
+$endif$
+  &lt;title&gt;$title$&lt;/title&gt;
+$if(author)$$
+for(author)$
+  &lt;meta name=&quot;author&quot; content=&quot;$author$&quot;&gt;
+$endfor$
+$endif$
+$if(description)$
+  &lt;meta name=&quot;description&quot; content=&quot;$description$&quot;&gt;
+$endif$
+$if(rss)$
+  &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; href=&quot;$rss$&quot;&gt;
+$endif$
+$if(theme.style)$
+$for(theme.style)$
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;$theme.style$&quot;&gt;
+$endfor$
+$endif$
+$if(style)$
+$for(style)$
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;$style$&quot;&gt;
+$endfor$
+$endif$
+$if(theme.module)$
+$for(theme.module)$
+  &lt;script type=&quot;module&quot; src=&quot;$theme.module$&quot;&gt;&lt;/script&gt;
+$endfor$
+$endif$
+$if(module)$
+$for(module)$
+  &lt;script type=&quot;module&quot; src=&quot;$module$&quot;&gt;&lt;/script&gt;
+$endfor$
+$endif$
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;&lt;a href=&quot;index.html&quot;&gt;$title$&lt;/a&gt;$if(description)$&lt;br&gt;&lt;small&gt;$description$&lt;/small&gt;$endif$&lt;/h1&gt;
+$if(nav)$
+    &lt;nav&gt;$for(nav)$&lt;a href=&quot;$nav.href$&quot;&gt;$nav.label$&lt;/a&gt;$sep$ / $endfor$&lt;/nav&gt;
+$endif$
+  &lt;/header&gt;
+
+  &lt;main&gt;
+$body$
+$if(counter)$&lt;p id=&quot;counter&quot;&gt;&lt;/p&gt;$endif$
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&lt;a href=&quot;index.html&quot;&gt;$title$&lt;/a&gt;$if(description)$&lt;br&gt;&lt;small&gt;$description$&lt;/small&gt;$endif$&lt;/p&gt;
+$if(nav)$
+    &lt;nav&gt;$for(nav)$&lt;a href=&quot;$nav.href$&quot;&gt;$nav.label$&lt;/a&gt;$sep$ / $endfor$&lt;/nav&gt;
+$endif$
+  &lt;/footer&gt;
+
+$if(theme.script)$
+$for(theme.script)$
+  &lt;script src=&quot;$theme.script$&quot;&gt;&lt;/script&gt;
+$endfor$
+$endif$
+$if(script)$
+$for(script)$
+  &lt;script src=&quot;$script$&quot;&gt;&lt;/script&gt;
+$endfor$
+$endif$
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+<p>Add the <code>counter</code> parameter to the metadata in
+<code>metadata/default.yaml</code> to show the counter of the
+template.</p>
+<pre class="yaml"><code>---
+rss: rss.xml
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+style:
+  - assets/style.css
+script:
+  - assets/script.js
+module:
+  - assets/Counter.js
+counter: yes
+---</code></pre>
+<p>And remove the counter element from <code>index.md</code>.</p>
+<pre class="markdown"><code># Home
+
+- Download a [fact about the web](assets/fact.txt) in text format.
+- Read the [LICENSE](LICENSE).</code></pre>
+<h2 id="theme">Theme</h2>
+<p>The <code>theme</code> folder contains assets, metadata and templates
+used when the project does not provide them. In that case, it will get
+them from the installation.</p>
+<pre class="bash"><code>mkdir -p theme/assets theme/metadata theme/template</code></pre>
+<p>The <code>theme/assets</code> folder can contain anything, it is
+copied entirely to <code>docs</code>. In page documents like
+<code>index.md</code> files are accessed via the <code>/theme</code>
+route, available at <code>http://localhost:8000/theme</code>. Use only
+the stylesheet and module.</p>
+<pre class="bash"><code>mv assets/style.css assets/Counter.js theme/assets</code></pre>
+<p>Use the template from <code>template/default.html</code> and delete
+the empty folder.</p>
+<pre class="bash"><code>mv template/default.html theme/template
+rm -rf template</code></pre>
+<p>Put the metadata needed for a new project inside
+<code>theme/metadata/default.yaml</code>.</p>
+<pre class="yaml"><code>---
+title: My website
+description: My website in cyberspace
+author:
+  - Jane Dev
+nav:
+  - label: Home
+    href: index.html
+theme:
+  style:
+    - theme/style.css
+  module:
+    - theme/Counter.js
+counter: yes
+---</code></pre>
+<p>And leave only the metadata for the current project in
+<code>metadata/default.yaml</code>.</p>
+<pre class="yaml"><code>---
+rss: rss.xml
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+script:
+  - assets/script.js
+---</code></pre>
+<h2 id="tests">Tests</h2>
+<p>The <code>test</code> folder contains Spock test cases named
+<code>*Spec.groovy</code>.</p>
+<pre class="bash"><code>mkdir test</code></pre>
+<p>To check that the homepage, sitemap and feed exist add a new test for
+it, like <code>test/MySiteSpec.groovy</code>.</p>
+<pre class="javascript"><code>/* groovylint-disable CompileStatic, JavaIoPackageAccess, NoWildcardImports */
+/* groovylint-disable MethodName, FactoryMethodName, MethodReturnTypeRequired */
+/* groovylint-disable ClassJavadoc, JUnitPublicNonTestMethod */
+
+import spock.lang.*
+
+class WebPagesSpec extends Specification {
+
+    def &#39;at least the index source should exist&#39;() {
+    expect:
+        new File(&#39;index.md&#39;).exists()
+    }
+
+    def &#39;at least the index output should exist&#39;() {
+    expect:
+        new File(&#39;docs/index.html&#39;).exists()
+    }
+
+    def &#39;the sitemap source should exist&#39;() {
+    expect:
+        new File(&#39;metadata/sitemap.yaml&#39;).exists()
+    }
+
+    def &#39;the sitemap output should exist&#39;() {
+    expect:
+        new File(&#39;docs/sitemap.xml&#39;).exists()
+    }
+
+    def &#39;the feed source should exist&#39;() {
+    expect:
+        new File(&#39;metadata/rss.yaml&#39;).exists()
+    }
+
+    def &#39;the feed output should exist&#39;() {
+    expect:
+        new File(&#39;docs/rss.xml&#39;).exists()
+    }
+
+}</code></pre>
+<h2 id="publish">Publish</h2>
+<p>Go live for free at <a href="https://neocities.org/">Neocities</a>,
+<a href="https://docs.gitlab.com/ee/user/project/pages/">GitLab
+Pages</a>, or <a href="https://pages.github.com/">GitHub Pages</a>. For
+self-hosting use the <code>docs</code> folder as the public directory of
+the HTTP server.</p>
+<p>The base URL can be set in metadata files like
+<code>metadata/default.yaml</code> with <code>base</code>. Remember to
+update <code>metadata/rss.yaml</code> and
+<code>metadata/sitemap.yaml</code> accordingly.</p>
+<pre class="yaml"><code>---
+base: https://janedev.github.io/my-website/
+rss: rss.xml
+nav:
+  - label: Home
+    href: index.html
+  - label: About
+    href: about.html
+  - label: RSS
+    href: rss.xml
+  - label: Sitemap
+    href: sitemap.xml
+script:
+  - assets/script.js
+---</code></pre>
+<p>The <code>.rewrite</code> file can be used to change the name of the
+generated HTML. Each line should contain a key-value pair separated by
+<code>:</code>. A good example is using the <code>README</code> document
+as the index page.</p>
+<pre><code>README:index</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<p>The <a
+href="https://marcbperez.github.io/markdown-pages/elements.html">Elements
+page</a> lists everything the Markdown documents can show.</p> ]]></description>
   <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/tutorial.html</guid>
   <author>Marc B. Perez</author>
   <pubDate>3 Dec 2023</pubDate>
 </item>
 <item>
-  <title>Elements</title>
+  <title>The Elements page, with a list of elements supported by the
+pages, is now available online.</title>
   <link>https://marcbperez.github.io/markdown-pages/elements.html</link>
-  <description>The Elements page, with a list of elements supported by
-the pages, is now available online.</description>
+  <description><![CDATA[ <h1 id="elements">Elements</h1>
+<p>A list of all the elements that can be used in Markdown documents to
+show content. Read the <a
+href="https://marcbperez.github.io/markdown-pages/tutorial.html">tutorial</a>
+first if you want to know how they are used to generate web pages.</p>
+<h2 id="text">Text</h2>
+<pre class="markdown"><code>**Bold**, *italics* or ~~strikethrough~~, with multiple lines.\
+Subscript H~2~O or superscript X^2^.</code></pre>
+<p><strong>Bold</strong>, <em>italics</em> or <del>strikethrough</del>,
+with multiple lines.<br />
+Subscript H<sub>2</sub>O or superscript X<sup>2</sup>.</p>
+<h2 id="headings">Headings</h2>
+<pre class="markdown"><code># Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6</code></pre>
+<h1>
+Heading 1
+</h1>
+<h2>
+Heading 2
+</h2>
+<h3>
+Heading 3
+</h3>
+<h4>
+Heading 4
+</h4>
+<h5>
+Heading 5
+</h5>
+<h6>
+Heading 6
+</h6>
+<h2 id="quote">Quote</h2>
+<pre class="markdown"><code>&gt; A section that is quoted from another source.
+&gt; The continuation of the text.</code></pre>
+<blockquote>
+<p>A section that is quoted from another source. The continuation of the
+text.</p>
+</blockquote>
+<h2 id="definition">Definition</h2>
+<pre class="markdown"><code>Term name:
+: Term definition.</code></pre>
+<dl>
+<dt>Term name:</dt>
+<dd>
+Term definition.
+</dd>
+</dl>
+<h2 id="list">List</h2>
+<pre class="markdown"><code>- Item A
+- Item B
+- Item C</code></pre>
+<ul>
+<li>Item A</li>
+<li>Item B</li>
+<li>Item C</li>
+</ul>
+<h2 id="ordered-list">Ordered list</h2>
+<pre class="markdown"><code>1. First item
+2. Second item
+3. Third item</code></pre>
+<ol type="1">
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ol>
+<h2 id="checklist">Checklist</h2>
+<pre class="markdown"><code>- [x] Task 1
+- [x] Task 2
+- [ ] Task 3</code></pre>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Task 1</label></li>
+<li><label><input type="checkbox" checked="" />Task 2</label></li>
+<li><label><input type="checkbox" />Task 3</label></li>
+</ul>
+<h2 id="link">Link</h2>
+<pre class="markdown"><code>[Link](elements.html) to this page.</code></pre>
+<p><a
+href="https://marcbperez.github.io/markdown-pages/elements.html">Link</a>
+to this page.</p>
+<h2 id="image">Image</h2>
+<pre class="markdown"><code>![Small image depicting a page.](assets/favicon.ico &quot;Page icon&quot;)</code></pre>
+<figure>
+<img
+src="https://marcbperez.github.io/markdown-pages/assets/favicon.ico"
+title="Page icon" alt="Small image depicting a page." />
+<figcaption aria-hidden="true">Small image depicting a
+page.</figcaption>
+</figure>
+<pre class="markdown"><code>This is an inline image: ![Small image depicting a page.](assets/favicon.ico &quot;Page icon&quot;).</code></pre>
+<p>This is an inline image: <img
+src="https://marcbperez.github.io/markdown-pages/assets/favicon.ico"
+title="Page icon" alt="Small image depicting a page." />.</p>
+<p>The title at the end, <code>"Page icon"</code>, is optional and can
+be used for styling.</p>
+<pre class="css"><code>img[title$=&quot;icon&quot;] {
+  border: 1px solid black;
+}</code></pre>
+<h2 id="table">Table</h2>
+<pre class="markdown"><code>| Left-aligned | Center-aligned | Right-aligned | 
+| :----------- | :------------: | ------------: |
+| 10           | Red, blue.     | Done          |
+| 256          | Red, yellow.   | Pending       |</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Left-aligned</th>
+<th style="text-align: center;">Center-aligned</th>
+<th style="text-align: right;">Right-aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: center;">Red, blue.</td>
+<td style="text-align: right;">Done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">256</td>
+<td style="text-align: center;">Red, yellow.</td>
+<td style="text-align: right;">Pending</td>
+</tr>
+</tbody>
+</table>
+<h2 id="separator">Separator</h2>
+<pre class="markdown"><code>---</code></pre>
+<p>See the horizontal rules between the header, content and footer of
+this page.</p>
+<h2 id="footnote">Footnote</h2>
+<pre class="markdown"><code>Here&#39;s a sentence with a footnote, the footnote itself must be defined at
+the bottom of the document. [^1]</code></pre>
+<p>Here’s a sentence with a footnote, the footnote itself must be
+defined at the bottom of the document. <a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<pre class="markdown"><code>[^1]: This is the footnote itself.</code></pre>
+<h2 id="code">Code</h2>
+<pre class="markdown"><code>This is an inline code block: `user = &quot;dev&quot;`.</code></pre>
+<p>This is an inline code block: <code>user = "dev"</code>.</p>
+<p>In the pre-installed template, code highlighting is done by <a
+href="https://prismjs.com/">Prism</a>.</p>
+<pre class="markdown"><code>```
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      h1 {
+        color: blue;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Code highlighter&lt;/h1&gt;
+    &lt;script&gt;
+      for (let i = 0; i &lt; 10; i++) {
+        alert(i);
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```</code></pre>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      h1 {
+        color: blue;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Code highlighter&lt;/h1&gt;
+    &lt;script&gt;
+      for (let i = 0; i &lt; 10; i++) {
+        alert(i);
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The language can be specified in the first line, like
+<code>```markup</code>. The available languages are <code>markup</code>,
+shown above and by default, <code>bash</code>, <code>css</code>,
+<code>javascript</code>, <code>markdown</code>, <code>python</code> and
+<code>yaml</code>. New languages can be added to the <code>module</code>
+list of the page metadata.</p>
+<pre class="yaml"><code>module:
+  - https://esm.sh/prismjs/components/prism-rust.min.js</code></pre>
+<h2 id="math">Math</h2>
+<pre class="markdown"><code>$a^2 + b^2 = c^2$
+
+$v(t) = v_0 + \frac{1}{2}at^2$
+
+$\gamma = \frac{1}{\sqrt{1 - v^2/c^2}}$  
+
+$\int_{0}^{1} x dx = \left[ \frac{1}{2}x^2 \right]_{0}^{1} = \frac{1}{2}$
+
+$e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = \lim_{n\rightarrow\infty} (1+x/n)^n$</code></pre>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">a^2 + b^2 = c^2</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>v</mi><mn>0</mn></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">v(t) = v_0 + \frac{1}{2}at^2</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mfrac><mn>1</mn><msqrt><mrow><mn>1</mn><mo>−</mo><msup><mi>v</mi><mn>2</mn></msup><mi>/</mi><msup><mi>c</mi><mn>2</mn></msup></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\gamma = \frac{1}{\sqrt{1 - v^2/c^2}}</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><mi>x</mi><mi>d</mi><mi>x</mi><mo>=</mo><msubsup><mrow><mo stretchy="true" form="prefix">[</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mn>0</mn><mn>1</mn></msubsup><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\int_{0}^{1} x dx = \left[ \frac{1}{2}x^2 \right]_{0}^{1} = \frac{1}{2}</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mi>x</mi></msup><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mi>∞</mi></msubsup><mfrac><msup><mi>x</mi><mi>n</mi></msup><mrow><mi>n</mi><mi>!</mi></mrow></mfrac><mo>=</mo><msub><mo>lim</mo><mrow><mi>n</mi><mo>→</mo><mi>∞</mi></mrow></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mi>/</mi><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = \lim_{n\rightarrow\infty} (1+x/n)^n</annotation></semantics></math></p>
+<h2 id="html">HTML</h2>
+<pre class="markdown"><code>Text with &lt;small&gt;smaller&lt;/small&gt; text inside.
+
+&lt;div&gt;
+  &lt;p&gt;All content inside an HTML element must be HTML.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>Text with <small>smaller</small> text inside.</p>
+<div>
+<p>
+All content inside an HTML element must be HTML.
+</p>
+</div>
+<aside id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is the footnote itself.<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside> ]]></description>
   <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/elements.html</guid>
   <author>Marc B. Perez</author>
   <pubDate>2 Dec 2023</pubDate>
 </item>
 <item>
-  <title>README</title>
+  <title>The README, for developers, is now available online.</title>
   <link>https://marcbperez.github.io/markdown-pages/README.html</link>
-  <description>The README, for developers, is now available
-online.</description>
+  <description><![CDATA[ <h1 id="markdown-pages">markdown-pages</h1>
+<p>A Static Site Generator for Markdown powered by Gradle, Pandoc,
+Spock, Preact and a minimalistic template.</p>
+<h2 id="installation">Installation</h2>
+<p>Clone the sources in Debian with Java 18 or newer and install the
+project dependencies. Information on how to install Java can be found in
+the <a href="https://wiki.debian.org/Java#Quick_Install_Guide">official
+documentation</a>.</p>
+<pre class="bash"><code>git clone https://github.com/marcbperez/markdown-pages
+cd markdown-pages
+sudo ./gradlew install</code></pre>
+<p>For end users, <code>install.sh</code> downloads a tarball of the
+release, runs the full installation process and adds
+<code>bin/markdown-pages</code> to the path.</p>
+<h2 id="usage">Usage</h2>
+<p>For continuous integration and development use the Gradle wrapper.
+Without parameters, it will build the project into the <code>docs</code>
+folder and run tests. The <code>serve</code> task will use the build
+folder to start a development server at <a
+href="http://localhost:8000">http://localhost:8000</a>.</p>
+<pre class="bash"><code>./gradlew
+./gradlew serve</code></pre>
+<p>For a continuous build use <code>./gradlew --continuous</code>. For a
+full list of tasks, see <code>./gradlew tasks --all</code>. Without the
+wrapper use Gradle directly. This will create it in case it is not
+present. The equivalent commands use <code>gradle</code> instead of
+<code>./gradlew</code>. Information on how to install Gradle can be
+found in the <a
+href="https://marcbperez.github.io/markdown-pages/install-gradle">official
+documentation</a>.</p>
+<p>The <code>bin/markdown-pages</code> script runs a continuous build
+and serves the results at the same time using the wrapper. It can
+replace the commands described above and works from any directory.</p>
+<pre class="bash"><code>export PATH=$(pwd)/bin:$PATH
+mkdir ~/my-site
+cd ~/my-site
+echo &quot;# Home&quot; &gt; index.md
+markdown-pages</code></pre>
+<h2 id="testing">Testing</h2>
+<p>Test checks are executed automatically every time the project is
+built. To run them manually use the <code>./gradlew test</code> command.
+It will execute all the Spock tests from the <code>test</code> folder
+whose names match <code>test/**/*Spec.groovy</code>.</p>
+<h2 id="deployment">Deployment</h2>
+<p>The generated site can be deployed to any HTTP server by uploading
+the <code>docs</code> folder and using it as the public directory.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>The <a
+href="https://github.com/marcbperez/markdown-pages/issues">issue
+tracker</a> intends to manage and compile bugs, enhancements, proposals
+and tasks. Reading through its material or reporting to its contributors
+via the platform is strongly recommended.</p>
+<h2 id="contributing">Contributing</h2>
+<p>This project adheres to <a href="http://semver.org">Semantic
+Versioning</a> and to certain syntax conventions defined in <a
+href="https://marcbperez.github.io/markdown-pages/.editorconfig">.editorconfig</a>.
+To get a list of changes refer to the <a
+href="https://marcbperez.github.io/markdown-pages/CHANGELOG.html">CHANGELOG</a>.
+Only branches prefixed by <em>feature-</em>, <em>hotfix-</em>, or
+<em>release-</em> will be considered:</p>
+<ul>
+<li>Fork the project.</li>
+<li>Create your new branch:
+<code>git checkout -b feature-my-feature develop</code></li>
+<li>Commit your changes:
+<code>git commit -am 'Added my new feature.'</code></li>
+<li>Push the branch:
+<code>git push origin feature-my-feature</code></li>
+<li>Submit a pull request.</li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p>Created by <a href="https://marcbperez.github.io">Marc B. Perez</a>
+and maintained by its <a href="https://marcbperez.github.io">author</a>
+and contributors.</p>
+<h2 id="license">License</h2>
+<p>This project is licensed under the <a
+href="https://marcbperez.github.io/markdown-pages/LICENSE">Apache
+License Version 2.0</a>.</p> ]]></description>
   <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/README.html</guid>
   <author>Marc B. Perez</author>
   <pubDate>2 Dec 2023</pubDate>
 </item>
 <item>
-  <title>CHANGELOG</title>
+  <title>The CHANGELOG, for developers, is now available online.</title>
   <link>https://marcbperez.github.io/markdown-pages/CHANGELOG.html</link>
-  <description>The CHANGELOG, for developers, is now available
-online.</description>
+  <description><![CDATA[ <h1 id="change-log">Change Log</h1>
+<p>All notable changes to this project will be documented in this file.
+This project adheres to <a href="http://semver.org">Semantic
+Versioning</a>.</p>
+<h2 id="unreleased">Unreleased</h2>
+<h2 id="section">0.12.0 - 2023-12-4</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Page contents in RSS item description.</li>
+<li>Lua filters to replace Groovy helper.</li>
+</ul>
+<h2 id="section-1">0.11.0 - 2023-12-3</h2>
+<h3 id="added-1">Added</h3>
+<ul>
+<li>File and link rewrites.</li>
+<li>Deployment workflow.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Installation script.</li>
+<li>Base URL, links and paths.</li>
+<li>Body class, navigation and CSS image selectors.</li>
+</ul>
+<h2 id="section-2">0.10.0 - 2023-12-2</h2>
+<h3 id="added-2">Added</h3>
+<ul>
+<li>Site build for this project.</li>
+<li>Spock cases for this project.</li>
+<li>Minimalistic theme and pages for this project.</li>
+<li>The new build pipeline and install script.</li>
+</ul>
+<h3 id="changed-1">Changed</h3>
+<ul>
+<li>The editor configuration, CHANGELOG and README.</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>All the files from the previous version.</li>
+</ul>
+<h2 id="section-3">0.9.1 - 2017-11-25</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Unnecessary JavaScript dependencies and template issues.</li>
+<li>Project author’s name.</li>
+</ul>
+<h2 id="section-4">0.9.0 - 2017-09-14</h2>
+<h3 id="added-3">Added</h3>
+<ul>
+<li>Dynamic template and metadata in build script.</li>
+<li>Default metadata in its folder.</li>
+<li>Default template.</li>
+<li>Style for dark HR elements.</li>
+<li>Gradle wrapper for this project.</li>
+</ul>
+<h2 id="section-5">0.8.3 - 2017-07-03</h2>
+<h3 id="fixed-1">Fixed</h3>
+<ul>
+<li>Missing Material Design Lite script.</li>
+<li>Darken and lighten template functionality.</li>
+<li>Template layout and style.</li>
+</ul>
+<h2 id="section-6">0.8.2 - 2017-06-29</h2>
+<h3 id="fixed-2">Fixed</h3>
+<ul>
+<li>Errata on README description and project usage.</li>
+<li>Scripts, style and template.</li>
+</ul>
+<h2 id="section-7">0.8.1 - 2017-05-12</h2>
+<h3 id="fixed-3">Fixed</h3>
+<ul>
+<li>Build script with background serve task.</li>
+<li>Build information and errata in README usage.</li>
+<li>Google Analytics tracking code in the main template.</li>
+</ul>
+<h2 id="section-8">0.8.0 - 2017-04-18</h2>
+<h3 id="changed-2">Changed</h3>
+<ul>
+<li>Build folder to docs.</li>
+<li>Ignored the new build folder.</li>
+<li>Gradle wrapper for this project.</li>
+<li>Project usage and instructions.</li>
+</ul>
+<h2 id="section-9">0.7.2 - 2017-03-25</h2>
+<h3 id="fixed-4">Fixed</h3>
+<ul>
+<li>Typographical errors in README usage.</li>
+</ul>
+<h2 id="section-10">0.7.1 - 2017-03-20</h2>
+<h3 id="changed-3">Changed</h3>
+<ul>
+<li>README file with new usage instructions.</li>
+<li>Gradle wrapper for this project.</li>
+<li>Gradle build script for this project.</li>
+<li>Test folder location inside the project.</li>
+</ul>
+<h2 id="section-11">0.7.0 - 2017-03-13</h2>
+<h3 id="added-4">Added</h3>
+<ul>
+<li>Gradle wrapper for this project.</li>
+<li>Dockerfile test case for the build environment.</li>
+<li>Dockerfile main command for the continuous build.</li>
+<li>Wrapper and serve tasks for the Gradle build script.</li>
+</ul>
+<h3 id="changed-4">Changed</h3>
+<ul>
+<li>README file with new usage instructions.</li>
+</ul>
+<h2 id="section-12">0.6.1 - 2017-01-27</h2>
+<h3 id="added-5">Added</h3>
+<ul>
+<li>Necessary Dockerfile for hub integration.</li>
+<li>Dockerfile build directory on docker-compose script.</li>
+</ul>
+<h2 id="section-13">0.6.0 - 2017-01-27</h2>
+<h3 id="removed-1">Removed</h3>
+<ul>
+<li>Dockerfile in favour of external builder image.</li>
+<li>Dockerfile tests for the build environment.</li>
+</ul>
+<h3 id="changed-5">Changed</h3>
+<ul>
+<li>The docker-compose script uses an external builder image.</li>
+</ul>
+<h2 id="section-14">0.5.0 - 2017-01-13</h2>
+<h3 id="added-6">Added</h3>
+<ul>
+<li>Cases for the supporting files.</li>
+<li>Cases for the build environment.</li>
+<li>Cases for the default web pages.</li>
+</ul>
+<h2 id="section-15">0.4.0 - 2017-01-12</h2>
+<h3 id="changed-6">Changed</h3>
+<ul>
+<li>Layout style sheet to show an article.</li>
+<li>Main script to support code highlighting.</li>
+</ul>
+<h2 id="section-16">0.3.0 - 2017-01-11</h2>
+<h3 id="added-7">Added</h3>
+<ul>
+<li>Index page in Markdown format.</li>
+<li>Layout HTML template and metadata.</li>
+<li>Page assets and favicon.</li>
+<li>Main script and style sheet.</li>
+</ul>
+<h2 id="section-17">0.2.0 - 2017-01-10</h2>
+<h3 id="added-8">Added</h3>
+<ul>
+<li>Gradle build script for this project.</li>
+<li>Docker and docker-compose configuration for this project.</li>
+</ul>
+<h2 id="section-18">0.1.0 - 2017-01-09</h2>
+<h3 id="added-9">Added</h3>
+<ul>
+<li>A README which covers project description and usage.</li>
+<li>This CHANGELOG file to document project changes and versions.</li>
+<li>An EditorConfig to suggest syntax and format standards.</li>
+<li>A LICENSE file to define project ownership and rights.</li>
+<li>A .gitignore list for untracked resources.</li>
+</ul> ]]></description>
   <guid isPermaLink="true">https://marcbperez.github.io/markdown-pages/CHANGELOG.html</guid>
   <author>Marc B. Perez</author>
   <pubDate>2 Dec 2023</pubDate>

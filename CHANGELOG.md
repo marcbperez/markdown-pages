@@ -5,6 +5,13 @@ project adheres to [Semantic Versioning](http://semver.org).
 
 ## Unreleased
 
+## 0.12.0 - 2023-12-4
+
+### Added
+
+  - Page contents in RSS item description.
+  - Lua filters to replace Groovy helper.
+
 ## 0.11.0 - 2023-12-3
 
 ### Added

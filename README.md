@@ -80,8 +80,8 @@ refer to the [CHANGELOG][changelog]. Only branches prefixed by *feature-*,
 
 ## Credits
 
-This project was created by [Marc B. Perez][author] and maintained by its
-[author][author] and contributors.
+Created by [Marc B. Perez][author] and maintained by its [author][author] and
+contributors.
 
 ## License
 

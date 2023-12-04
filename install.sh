@@ -7,7 +7,7 @@
 # `install.sh .` uses the current directory.
 
 # The version to download.
-VER="0.11.0"
+VER="0.12.0"
 # The installation folder.
 DIR="${1:-"$HOME/.local/bin"}"
 # The folder where the downloaded version will be extracted.

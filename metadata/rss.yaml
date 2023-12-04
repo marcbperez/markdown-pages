@@ -11,31 +11,31 @@ channel:
   description: Static Site Generator for Markdown
 item:
   - link: index.html
-    title: Home
-    description: The Home page, with instructions on how to install and get
-      started with markdown-pages, is now available online.
+    title: The Home page, with instructions on how to install and get started
+      with markdown-pages, is now available online.
+    description: '{{index.html}}'
     pubDate: 3 Dec 2023
     author: Marc B. Perez
   - link: tutorial.html
-    title: Tutorial
-    description: The Tutorial page, with a step-by-step guide to markdown-pages,
-      is now available online.
+    title: The Tutorial page, with a step-by-step guide to markdown-pages, is
+      now available online.
+    description: '{{tutorial.html}}'
     pubDate: 3 Dec 2023
     author: Marc B. Perez
   - link: elements.html
-    title: Elements
-    description: The Elements page, with a list of elements supported by the
-      pages, is now available online.
+    title: The Elements page, with a list of elements supported by the pages, is
+      now available online.
+    description: '{{elements.html}}'
     pubDate: 2 Dec 2023
     author: Marc B. Perez
   - link: README.html
-    title: README
-    description: The README, for developers, is now available online.
+    title: The README, for developers, is now available online.
+    description: '{{README.html}}'
     pubDate: 2 Dec 2023
     author: Marc B. Perez
   - link: CHANGELOG.html
-    title: CHANGELOG
-    description: The CHANGELOG, for developers, is now available online.
+    title: The CHANGELOG, for developers, is now available online.
+    description: '{{CHANGELOG.html}}'
     pubDate: 2 Dec 2023
     author: Marc B. Perez
 ---

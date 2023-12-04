@@ -11,7 +11,7 @@ newer.**
 # Get markdown-pages
 
 ```bash
-curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.11.0/install.sh | sh
+curl -L https://raw.githubusercontent.com/marcbperez/markdown-pages/0.12.0/install.sh | sh
 ```
 
 Installs the latest version in `~/.local/bin`. To change the default folder set
