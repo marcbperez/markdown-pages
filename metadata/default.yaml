@@ -4,7 +4,6 @@
 # with a CSS, JavaScript module or JavaScript script, respectively.
 
 base: https://marcbperez.github.io/markdown-pages/
-class: detect light medium serif
 rss: rss.xml
 favicon: assets/favicon.ico
 title: markdown-pages

@@ -5,7 +5,7 @@
 # out parameters are kept as references for the template.
 
 # base: https://my-site.net/
-# class: dark
+class: detect light medium serif
 # rss: rss.xml
 favicon: theme/favicon.ico
 lang: en
